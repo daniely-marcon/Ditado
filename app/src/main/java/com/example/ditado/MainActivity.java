@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         peixes.add(new Animal("Dourado", R.drawable.dourado, R.raw.dourado));
         peixes.add(new Animal("Piraputanga", R.drawable.piraputanga, R.raw.piraputanga));
         peixes.add(new Animal("Bagre", R.drawable.bagre, R.raw.bagre));
-        ))
 
 
     }
