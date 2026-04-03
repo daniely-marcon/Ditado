@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Animal> peixes = new ArrayList<>();{
-        peixes.add(new Animal("Pirarucu", R.drawable.pirarucu, R.raw.pirarucu));
-        peixes.add(new Animal("Piau", R.drawable.piau, R.raw.piau));
+        //peixes.add(new Animal("Pirarucu", R.drawable.pirarucu, R.raw.pirarucu));
+        //peixes.add(new Animal("Piau", R.drawable.piau, R.raw.piau));
         peixes.add(new Animal("Dourado", R.drawable.dourado, R.raw.dourado));
         peixes.add(new Animal("Piraputanga", R.drawable.piraputanga, R.raw.piraputanga));
         peixes.add(new Animal("Bagre", R.drawable.bagre, R.raw.bagre));
