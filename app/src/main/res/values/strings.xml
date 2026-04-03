@@ -9,4 +9,13 @@
 
     <string name="lorem_ipsum">
     </string>
+
+    <string-array name="fonte">
+        <item>Pequeno</item>
+        <item>Padrão</item>
+        <item>Grande</item>
+    </string-array>
+
+    <string name="titulo">Ditado</string>
+
 </resources>
