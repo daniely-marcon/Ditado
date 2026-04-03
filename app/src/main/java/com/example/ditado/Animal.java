@@ -13,5 +13,19 @@ public class Animal{
         this.imagemId = imagemId;
         this.audioId = audioId;
     }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public int getImagemId(){
+        return imagemId;
+    }
+
+    public int getAudioId(){
+        return audioId;
+    }
+
+
 }
 
