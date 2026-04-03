@@ -6,49 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/txtTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo" />
+
     <GridView
         android:id="@+id/gvAves"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2">
+        android:numColumns="2"/>
 
-        <TextView
-            android:id="@+id/txtRepteis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/titulo" />
-    </GridView>
-    <TextView
-        android:id="@+id/txtAves"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo" />
     <GridView
         android:id="@+id/gvPeixes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"/>
-    <TextView
-        android:id="@+id/txtPeixes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo" />
+
     <GridView
         android:id="@+id/gvAnfibios"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"
         />
-    <TextView
-        android:id="@+id/txtAnfibios"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo" />
+
 
     <GridView
         android:id="@+id/gvRepteis"
