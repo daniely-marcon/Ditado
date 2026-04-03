@@ -32,8 +32,8 @@ O escopo inicial do aplicativo conta com o seguinte vocabulário, dividido por c
 | Beija-flor | Dourado | Cobra Coral | Sapo |
 | Tucano | Pirarucu | Sucuri | Axolote |
 | Arara | Piau | Iguana |  Perereca |
-| Papagaio | Bagre | Tartaruga | Salamandra |
-| Rolinha | Piraputanga | | |
+| Papagaio | Bagre | Tartaruga | Salamandra |  
+| Rolinha | Piraputanga | Lagartixa| |
 
 ## 🛠️ Tecnologias e Arquitetura
 
