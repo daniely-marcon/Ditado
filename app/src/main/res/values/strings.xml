@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">Ditado</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="action_settings">Home</string>
 
-    <string name="lorem_ipsum">
-    </string>
+    <string name="first_fragment_label">Home</string>
+    <string name="second_fragment_label">Treinamento</string>
+    <string name="terceiro_fragment_label">Estatísticas</string>
+
 
     <string-array name="fonte">
         <item>Pequeno</item>
@@ -16,6 +13,9 @@
         <item>Grande</item>
     </string-array>
 
+
     <string name="titulo">Ditado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

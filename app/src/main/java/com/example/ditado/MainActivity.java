@@ -86,16 +86,16 @@ public class MainActivity extends AppCompatActivity {
         gvRepteis=findViewById(R.id.gvRepteis);
         gvPeixes=findViewById(R.id.gvPeixes);
 
-        Adaptadora avesAdaptadora= new Adaptadora(this,aves);
+        Adaptadora avesAdaptadora= new Adaptadora(this,aves.subList(0,4));
         gvAves.setAdapter(avesAdaptadora);
 
-        Adaptadora peixesAdaptadora= new Adaptadora(this,peixes);
+        Adaptadora peixesAdaptadora= new Adaptadora(this,peixes.subList(0,4));
         gvPeixes.setAdapter(peixesAdaptadora);
 
-        Adaptadora anfibiosAdaptadora= new Adaptadora(this,anfibios);
+        Adaptadora anfibiosAdaptadora= new Adaptadora(this,anfibios.subList(0,4));
         gvAnfibios.setAdapter(anfibiosAdaptadora);
 
-        Adaptadora repteisAdaptadora= new Adaptadora(this,repteis);
+        Adaptadora repteisAdaptadora= new Adaptadora(this,repteis.subList(0,4));
         gvRepteis.setAdapter(repteisAdaptadora);
 
     }

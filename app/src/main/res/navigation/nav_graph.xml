@@ -24,5 +24,12 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/TerceiroFragment"
+        android:name="com.example.ditado.TerceiroFragment"
+        android:label="@string/terceiro_fragment_label"
+        tools:layout="@layout/fragment_terceiro">
     </fragment>
 </navigation>
