@@ -1,9 +1,6 @@
 package com.example.ditado;
 
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -14,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ditado.databinding.ActivityMainBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,39 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    private GridView gvAves,gvPeixes,gvAnfibios,gvRepteis;
 
-    private List<Animal> aves = new ArrayList<>();{
-        aves.add(new Animal("Arara", R.drawable.arara, R.raw.arara));
-        aves.add(new Animal("Tucano", R.drawable.tucano, R.raw.tucano));
-        aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
-        aves.add(new Animal("Papagaio", R.drawable.papagaio, R.raw.papagaio));
-        aves.add(new Animal("Rolinha", R.drawable.rolinha, R.raw.rolinha));
-    }
-
-    private List<Animal> repteis = new ArrayList<>();{
-        repteis.add(new Animal("Cobra Coral", R.drawable.coral, R.raw.cobracoral));
-        repteis.add(new Animal("Iguana", R.drawable.iguana, R.raw.iguana));
-        repteis.add(new Animal("Sucuri", R.drawable.sucuri, R.raw.sucuri));
-        repteis.add(new Animal("Tartaruga", R.drawable.tartaruga, R.raw.tartaruga));
-        repteis.add(new Animal("Lagartixa", R.drawable.lagartixa, R.raw.lagartixa));
-    }
-
-    private List<Animal> peixes = new ArrayList<>();{
-        peixes.add(new Animal("Pirarucu", R.drawable.pirarucu, R.raw.pirarucu));
-        peixes.add(new Animal("Piau", R.drawable.piau, R.raw.piau));
-        peixes.add(new Animal("Dourado", R.drawable.dourado, R.raw.dourado));
-        peixes.add(new Animal("Piraputanga", R.drawable.piraputanga, R.raw.piraputanga));
-        peixes.add(new Animal("Bagre", R.drawable.bagre, R.raw.bagre));
-    }
-
-    private List<Animal> anfibios = new ArrayList<>();{
-        anfibios.add(new Animal("Sapo", R.drawable.sapo, R.raw.sapo));
-        anfibios.add(new Animal("Axolote", R.drawable.axolote, R.raw.axolote));
-        anfibios.add(new Animal("Perereca", R.drawable.perereca, R.raw.perereca));
-        anfibios.add(new Animal("Salamandra", R.drawable.salamandra, R.raw.salamandra));
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,26 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        gvAves=findViewById(R.id.gvAves);
-        gvAnfibios=findViewById(R.id.gvAnfibios);
-        gvRepteis=findViewById(R.id.gvRepteis);
-        gvPeixes=findViewById(R.id.gvPeixes);
-
-        Adaptadora avesAdaptadora= new Adaptadora(this,aves.subList(0,4));
-        gvAves.setAdapter(avesAdaptadora);
-
-        Adaptadora peixesAdaptadora= new Adaptadora(this,peixes.subList(0,4));
-        gvPeixes.setAdapter(peixesAdaptadora);
-
-        Adaptadora anfibiosAdaptadora= new Adaptadora(this,anfibios.subList(0,4));
-        gvAnfibios.setAdapter(anfibiosAdaptadora);
-
-        Adaptadora repteisAdaptadora= new Adaptadora(this,repteis.subList(0,4));
-        gvRepteis.setAdapter(repteisAdaptadora);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,12 +61,9 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -129,10 +73,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
-
-
-
 }
-

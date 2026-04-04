@@ -44,10 +44,9 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageButton
-        android:id="@+id/btnfalar"
+        android:id="@+id/btnFalar"
         android:layout_width="35dp"
         android:layout_height="36dp"
-
         android:layout_marginTop="144dp"
         android:layout_marginBottom="88dp"
         android:backgroundTint="@color/destaque"
@@ -55,7 +54,8 @@
         app:circularflow_radiusInDP="15dp"
         app:layout_constraintBottom_toTopOf="@+id/edtPalavra"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="288dp" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="332dp" />
 
     <Button
         android:id="@+id/btnTerminar"
