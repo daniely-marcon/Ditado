@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_TerceiroFragment"
+            app:destination="@id/TerceiroFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,6 +27,10 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_TerceiroFragment"
+            app:destination="@id/TerceiroFragment"
+            />
 
     </fragment>
     <fragment
@@ -31,5 +38,9 @@
         android:name="com.example.ditado.TerceiroFragment"
         android:label="@string/terceiro_fragment_label"
         tools:layout="@layout/fragment_terceiro">
+        <action
+            android:id="@+id/action_TerceiroFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            />
     </fragment>
 </navigation>
