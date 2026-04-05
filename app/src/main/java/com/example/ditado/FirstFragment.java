@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -66,15 +68,13 @@ public class FirstFragment extends Fragment {
         anfibios.add(new Animal("Salamandra", R.drawable.salamandra, R.raw.salamandra));
     }
 
-    private void configurarGrid(android.widget.GridView grid, List<Animal> lista) {
-        Adaptadora adapter = new Adaptadora(getContext(), lista);
-        grid.setAdapter(adapter);
+    private void configurarGrid(GridView grid, List<Animal> lista) {
+        grid.setAdapter(new Adaptadora(getContext(), lista));
         grid.setOnItemClickListener((parent, view, position, id) -> {
-            Animal animal = lista.get(position);
+
             Bundle bundle = new Bundle();
-            bundle.putString("nome", animal.getNome());
-            bundle.putInt("foto", animal.getImagemId());
-            bundle.putInt("audio", animal.getAudioId());
+            bundle.putSerializable("lista_animais", (ArrayList<Animal>) lista);
+            bundle.putInt("indice_atual", position);
             
             NavHostFragment.findNavController(FirstFragment.this)
                     .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);

@@ -9,66 +9,77 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.ditado.databinding.FragmentSecondBinding;
-
-import com.example.ditado.databinding.FragmentSecondBinding;
+import java.util.List;
 
 public class SecondFragment extends Fragment {
-
     private FragmentSecondBinding binding;
-    private String nomeCorreto;
-    private int audioResId;
+    private List<Animal> listaAnimais;
+    private int indiceAtual = 0;
     private MediaPlayer mediaPlayer;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
-
-
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // 1. Recuperar os dados passados pelo FirstFragment
-        if (getArguments() != null) {
-            nomeCorreto = getArguments().getString("nome");
-            int fotoResId = getArguments().getInt("foto");
-            audioResId = getArguments().getInt("audio");
 
-            binding.imageView.setImageResource(fotoResId);
-            tocarAudio();
+        if (getArguments() != null) {
+            listaAnimais = (List<Animal>) getArguments().getSerializable("lista_animais");
+            indiceAtual = getArguments().getInt("indice_atual");
         }
 
-        // 2. Botão para ouvir o áudio de novo
-        binding.btnFalar.setOnClickListener(v -> tocarAudio());
+        if (listaAnimais != null) {
+            exibirAnimalAtual();
+        }
 
-        // 3. Lógica de Verificação
-        binding.btnVerificar.setOnClickListener(v -> {
-            String resposta = binding.edtPalavra.getText().toString().trim();
-            if (resposta.equalsIgnoreCase(nomeCorreto)) {
-                binding.txtResult.setText("Correto! Parabéns!");
-                binding.txtResult.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
-            } else {
-                binding.txtResult.setText("Incorreto. Tente novamente!");
-                binding.txtResult.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        // Botão para ouvir o áudio novamente
+        binding.btnFalar.setOnClickListener(v -> {
+            if (listaAnimais != null) {
+                tocarAudio(listaAnimais.get(indiceAtual).getAudioId());
             }
         });
 
-        // 4. Botão Voltar
+        binding.btnVerificar.setOnClickListener(v -> {
+            String resposta = binding.edtPalavra.getText().toString().trim();
+            if (resposta.equalsIgnoreCase(listaAnimais.get(indiceAtual).getNome())) {
+                indiceAtual++;
+                if (indiceAtual < listaAnimais.size()) {
+                    exibirAnimalAtual();
+                    binding.edtPalavra.setText(""); 
+                    binding.txtResult.setText("Muito bem! Próximo...");
+                } else {
+                    binding.txtResult.setText("Parabéns! Você terminou a lista!");
+                }
+            } else {
+                binding.txtResult.setText("Errou, tente de novo!");
+            }
+        });
+
         binding.btnVoltarF2.setOnClickListener(v ->
                 NavHostFragment.findNavController(this).navigateUp()
         );
     }
 
-    private void tocarAudio() {
-        if (mediaPlayer != null) mediaPlayer.release();
-        mediaPlayer = MediaPlayer.create(getContext(), audioResId);
-        mediaPlayer.start();
+    private void exibirAnimalAtual() {
+        if (listaAnimais != null && indiceAtual < listaAnimais.size()) {
+            Animal atual = listaAnimais.get(indiceAtual);
+            binding.imageView.setImageResource(atual.getImagemId());
+            tocarAudio(atual.getAudioId());
+        }
+    }
+
+    private void tocarAudio(int audioId) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(getContext(), audioId);
+        if (mediaPlayer != null) {
+            mediaPlayer.start();
+        }
     }
 
     @Override
@@ -81,6 +92,3 @@ public class SecondFragment extends Fragment {
         binding = null;
     }
 }
-
-
-

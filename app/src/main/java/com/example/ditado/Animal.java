@@ -1,9 +1,10 @@
 package com.example.ditado;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal{
+public class Animal implements Serializable {
     private String nome;
     private int imagemId; // ref para res/drawable
     private int audioId; // ref para res/raw
