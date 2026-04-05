@@ -50,20 +50,19 @@ public class SecondFragment extends Fragment {
 
             String resposta = binding.edtPalavra.getText().toString().trim();
             if (resposta.equalsIgnoreCase(listaAnimais.get(indiceAtual).getNome())) {
+                if (aprendidos.stream().noneMatch(a -> a.getNome().equals(listaAnimais.get(indiceAtual).getNome()))) {
+                    aprendidos.add(listaAnimais.get(indiceAtual));
+                }
                 indiceAtual++;
                 if (indiceAtual < listaAnimais.size()) {
                     exibirAnimalAtual();
                     binding.edtPalavra.setText(""); 
                     binding.txtResult.setText("Muito bem! Próximo...");
-                    binding.txtResult.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
-                    Animal animalQueAcertou = listaAnimais.get(indiceAtual-1);
 
-                    if (aprendidos.stream().noneMatch(a -> a.getNome().equals(animalQueAcertou.getNome()))) {
-                        aprendidos.add(animalQueAcertou);
-                    }
+
                 } else {
                     binding.txtResult.setText("Parabéns! Você terminou a lista!");
-                    binding.txtResult.setTextColor(android.graphics.Color.parseColor("#177FAB"));
+
 
                     Bundle lista = new Bundle();
                     lista.putSerializable("aprendidos",aprendidos);
@@ -93,6 +92,8 @@ public class SecondFragment extends Fragment {
             Animal atual = listaAnimais.get(indiceAtual);
             binding.imageView.setImageResource(atual.getImagemId());
             tocarAudio(atual.getAudioId());
+
+
         }
     }
 

@@ -6,15 +6,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import androidx.recyclerview.widget.ListAdapter;
-
 import java.util.List;
 
-public class Adaptadora extends BaseAdapter {
+public class AdaptadorGridView extends BaseAdapter {
     private Context ctx;
     private List<Animal> list;
 
-    public Adaptadora(Context ctx, List<Animal> list){
+    public AdaptadorGridView(Context ctx, List<Animal> list){
         this.ctx=ctx;
         this.list=list;
     }
@@ -45,13 +43,8 @@ public class Adaptadora extends BaseAdapter {
             iv = (ImageView) convertView;
         }
 
-
         Animal animalAtual = list.get(position);
-
-        // 2. Extraímos a imagem de dentro desse objeto usando o getter
         int fotoDoAnimal = animalAtual.getImagemId();
-
-        // 3. Colocamos a imagem na View
         iv.setImageResource(fotoDoAnimal);
 
         return iv;

@@ -2,8 +2,8 @@
     <string name="app_name">Ditado</string>
     <string name="action_settings">Home</string>
 
-    <string name="first_fragment_label">Home</string>
-    <string name="second_fragment_label">Treinamento</string>
+    <string name="first_fragment_label">Início</string>
+    <string name="second_fragment_label">Aprendizado</string>
     <string name="terceiro_fragment_label">Estatísticas</string>
 
 
