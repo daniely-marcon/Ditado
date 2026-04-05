@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:textAlignment="center"
     tools:context=".SecondFragment">
 
     <TextView
         android:id="@+id/txtPalavra"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        android:text="Palavra"
+        android:text="Escreva a palavra corretamente"
+        android:textAlignment="center"
+        android:textColor="@color/destaque"
         android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="80dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="167dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPalavra"
         tools:src="@tools:sample/avatars" />
@@ -39,6 +39,7 @@
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:inputType="text"
+        android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -47,27 +48,27 @@
         android:id="@+id/btnFalar"
         android:layout_width="35dp"
         android:layout_height="36dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="144dp"
         android:layout_marginBottom="88dp"
         android:backgroundTint="@color/destaque"
         android:src="@android:drawable/ic_lock_silent_mode_off"
         app:circularflow_radiusInDP="15dp"
         app:layout_constraintBottom_toTopOf="@+id/edtPalavra"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="332dp" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnTerminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
-        android:text="Finalizar"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="@color/destaque"
+        android:text="Verificar"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnVoltarF2"
         app:layout_constraintTop_toBottomOf="@+id/txtResult" />
 
     <TextView
@@ -76,33 +77,24 @@
         android:layout_height="19dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:text="Correto/Incorreto"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVerificar" />
-
-    <Button
-        android:id="@+id/btnVoltarF2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:text="Voltar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtResult" />
-
-    <Button
-        android:id="@+id/btnVerificar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="160dp"
-        android:text="Verificar"
+        android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPalavra" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabF2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/destaque"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/icons8_trophy_32" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

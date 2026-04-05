@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.ditado.databinding.FragmentSecondBinding;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SecondFragment extends Fragment {
@@ -16,6 +18,7 @@ public class SecondFragment extends Fragment {
     private List<Animal> listaAnimais;
     private int indiceAtual = 0;
     private MediaPlayer mediaPlayer;
+    private ArrayList<Animal> aprendidos=new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +46,8 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        binding.btnVerificar.setOnClickListener(v -> {
+        binding.btnTerminar.setOnClickListener(v -> {
+
             String resposta = binding.edtPalavra.getText().toString().trim();
             if (resposta.equalsIgnoreCase(listaAnimais.get(indiceAtual).getNome())) {
                 indiceAtual++;
@@ -51,17 +55,37 @@ public class SecondFragment extends Fragment {
                     exibirAnimalAtual();
                     binding.edtPalavra.setText(""); 
                     binding.txtResult.setText("Muito bem! Próximo...");
+                    binding.txtResult.setTextColor(android.graphics.Color.parseColor("#FFFFFF"));
+                    Animal animalQueAcertou = listaAnimais.get(indiceAtual-1);
+
+                    if (aprendidos.stream().noneMatch(a -> a.getNome().equals(animalQueAcertou.getNome()))) {
+                        aprendidos.add(animalQueAcertou);
+                    }
                 } else {
                     binding.txtResult.setText("Parabéns! Você terminou a lista!");
+                    binding.txtResult.setTextColor(android.graphics.Color.parseColor("#177FAB"));
+
+                    Bundle lista = new Bundle();
+                    lista.putSerializable("aprendidos",aprendidos);
+                    NavHostFragment.findNavController(SecondFragment.this)
+                            .navigate(R.id.action_SecondFragment_to_TerceiroFragment,lista);
                 }
+
             } else {
                 binding.txtResult.setText("Errou, tente de novo!");
+                binding.txtResult.setTextColor(android.graphics.Color.parseColor("#FF0000"));
+            }
+        });
+        binding.fabF2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle lista = new Bundle();
+                lista.putSerializable("aprendidos",aprendidos);
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_TerceiroFragment,lista);
             }
         });
 
-        binding.btnVoltarF2.setOnClickListener(v ->
-                NavHostFragment.findNavController(this).navigateUp()
-        );
     }
 
     private void exibirAnimalAtual() {
