@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
@@ -37,13 +38,24 @@ public class FirstFragment extends Fragment {
         configurarGrid(binding.gvPeixes, peixes);
         configurarGrid(binding.gvAnfibios, anfibios);
         configurarGrid(binding.gvRepteis, repteis);
+
+        binding.fabF1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_TerceiroFragment);
+            }
+        });
+        ArrayAdapter<CharSequence> adaptadorSpinner =  ArrayAdapter.createFromResource(getContext(),R.array.fonte, R.layout.meu_item_spinner);
+        adaptadorSpinner.setDropDownViewResource(R.layout.meu_item_spinner);
+        binding.spinner.setAdapter(adaptadorSpinner);
     }
 
     private void inicializarDados() {
         aves.clear();
         aves.add(new Animal("Arara", R.drawable.arara, R.raw.arara));
         aves.add(new Animal("Tucano", R.drawable.tucano, R.raw.tucano));
-        aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
+        //aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
         aves.add(new Animal("Papagaio", R.drawable.papagaio, R.raw.papagaio));
         aves.add(new Animal("Rolinha", R.drawable.rolinha, R.raw.rolinha));
 
@@ -69,7 +81,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void configurarGrid(GridView grid, List<Animal> lista) {
-        grid.setAdapter(new Adaptadora(getContext(), lista));
+        grid.setAdapter(new AdaptadorGridView(getContext(), lista));
         grid.setOnItemClickListener((parent, view, position, id) -> {
 
             Bundle bundle = new Bundle();

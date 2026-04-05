@@ -31,6 +31,10 @@
         android:layout_marginStart="252dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="41dp"
+        android:backgroundTint="@color/white"
+        android:contextClickable="false"
+        android:foregroundTint="@color/white"
+        android:popupBackground="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
@@ -40,13 +44,13 @@
         android:layout_width="165dp"
         android:layout_height="167dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="77dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
         android:numColumns="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gvPeixes"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
 
     <TextView
         android:id="@+id/txtPeixes"
@@ -142,9 +146,24 @@
         android:layout_marginStart="210dp"
         android:layout_marginTop="20dp"
         android:text="Tamanho da fonte"
-        android:textColor="@color/black"
+        android:textColor="@color/destaque"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabF1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:foregroundTint="@color/white"
+        android:tint="@color/white"
+        app:backgroundTint="@color/destaque"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/black"
+        app:srcCompat="@drawable/icons8_trophy_32" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
