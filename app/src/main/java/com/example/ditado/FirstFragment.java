@@ -55,7 +55,7 @@ public class FirstFragment extends Fragment {
         aves.clear();
         aves.add(new Animal("Arara", R.drawable.arara, R.raw.arara));
         aves.add(new Animal("Tucano", R.drawable.tucano, R.raw.tucano));
-        //aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
+        aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
         aves.add(new Animal("Papagaio", R.drawable.papagaio, R.raw.papagaio));
         aves.add(new Animal("Rolinha", R.drawable.rolinha, R.raw.rolinha));
 
@@ -86,7 +86,7 @@ public class FirstFragment extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("lista_animais", (ArrayList<Animal>) lista);
-            bundle.putInt("indice_atual", position);
+            bundle.putInt("indice_atual", 0);
             
             NavHostFragment.findNavController(FirstFragment.this)
                     .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
