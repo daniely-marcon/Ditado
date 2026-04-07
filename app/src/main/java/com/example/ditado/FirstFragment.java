@@ -82,7 +82,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void configurarGrid(GridView grid, List<Animal> lista) {
-        grid.setAdapter(new AdaptadorGridView(getContext(), lista));
+        grid.setAdapter(new AdaptadorGridView(getContext(), lista.subList(0,4)));
         grid.setOnItemClickListener((parent, view, position, id) -> {
 
             Bundle bundle = new Bundle();

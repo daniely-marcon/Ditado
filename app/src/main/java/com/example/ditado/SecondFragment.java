@@ -18,7 +18,7 @@ public class SecondFragment extends Fragment {
     private List<Animal> listaAnimais;
     private int indiceAtual = 0;
     private MediaPlayer mediaPlayer;
-    private ArrayList<Animal> aprendidos=new ArrayList<>();
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +48,14 @@ public class SecondFragment extends Fragment {
         });
 
         binding.btnTerminar.setOnClickListener(v -> {
-
+            MainActivity atividadeMae = (MainActivity) getActivity();
             String resposta = binding.edtPalavra.getText().toString().trim();
             if (resposta.equalsIgnoreCase(listaAnimais.get(indiceAtual).getNome())) {
-                if (aprendidos.stream().noneMatch(a -> a.getNome().equals(listaAnimais.get(indiceAtual).getNome()))) {
-                    aprendidos.add(listaAnimais.get(indiceAtual));
+                if (atividadeMae.aprendidos.stream().noneMatch(a -> a.getNome().equals(listaAnimais.get(indiceAtual).getNome()))) {
+                    if(atividadeMae!=null){
+                        atividadeMae.aprendidos.add(listaAnimais.get(indiceAtual));
+                    }
+
                 }
                 indiceAtual++;
                 if (indiceAtual < listaAnimais.size()) {
@@ -64,11 +67,8 @@ public class SecondFragment extends Fragment {
                 } else {
                     binding.txtResult.setText("Parabéns! Você terminou a lista!");
 
-
-                    Bundle lista = new Bundle();
-                    lista.putSerializable("aprendidos",aprendidos);
                     NavHostFragment.findNavController(SecondFragment.this)
-                            .navigate(R.id.action_SecondFragment_to_TerceiroFragment,lista);
+                            .navigate(R.id.action_SecondFragment_to_TerceiroFragment);
                 }
 
             } else {
@@ -79,10 +79,8 @@ public class SecondFragment extends Fragment {
         binding.fabF2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle lista = new Bundle();
-                lista.putSerializable("aprendidos",aprendidos);
                 NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_TerceiroFragment,lista);
+                        .navigate(R.id.action_SecondFragment_to_TerceiroFragment);
             }
         });
 

@@ -12,19 +12,19 @@
         android:id="@+id/txtEstatisticas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:text="Palavras Aprendidas"
         android:textAlignment="center"
         android:textColor="@color/destaque"
         android:textSize="40sp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="124dp" />
+        tools:layout_editor_absoluteX="124sp" />
 
     <ListView
         android:id="@+id/lvEstatisticas"
-        android:layout_width="409dp"
-        android:layout_height="588dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="409sp"
+        android:layout_height="588sp"
+        android:layout_marginTop="28sp"
         app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas"
         tools:layout_editor_absoluteX="1dp" >
     </ListView>
@@ -34,12 +34,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30sp"
+        android:layout_marginBottom="30sp"
         android:tint="@color/white"
         app:backgroundTint="@color/destaque"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/eraser" />
+        app:srcCompat="@drawable/home" />
+
+    <Button
+        android:id="@+id/btnLimpar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/destaque"
+        android:text="Limpar"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvEstatisticas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

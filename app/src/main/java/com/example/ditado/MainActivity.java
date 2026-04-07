@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    public ArrayList<Animal> aprendidos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
