@@ -34,24 +34,41 @@ public class TerceiroFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Animal> aprendidos = (ArrayList<Animal>) getArguments().getSerializable("aprendidos");
-        AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), aprendidos);
-        binding.lvEstatisticas.setAdapter(meuAdaptador);
+
+        if (getArguments() != null) {
+            ArrayList<Animal> aprendidos = (ArrayList<Animal>) getArguments().getSerializable("aprendidos");
+
+            if (aprendidos != null) {
 
 
-        binding.lvEstatisticas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                mediaPlayer = MediaPlayer.create(getContext(), aprendidos.get(position).getAudioId());
-                mediaPlayer.start();
+                AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), aprendidos);
+                binding.lvEstatisticas.setAdapter(meuAdaptador);
+
+
+                binding.lvEstatisticas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                         
+                        if (mediaPlayer != null) {
+                            mediaPlayer.release();
+                        }
+
+                        mediaPlayer = MediaPlayer.create(getContext(), aprendidos.get(position).getAudioId());
+
+                        if (mediaPlayer != null) {
+                            mediaPlayer.start();
+                        }
+                    }
+                });
+
+                binding.fabF3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        aprendidos.clear();
+                        meuAdaptador.notifyDataSetChanged();
+                    }
+                });
             }
-        });
-        binding.fabF3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                aprendidos.clear();
-                meuAdaptador.notifyDataSetChanged();
-            }
-        });
+        }
     }
 }
