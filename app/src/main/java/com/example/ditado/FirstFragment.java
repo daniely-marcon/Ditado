@@ -86,6 +86,50 @@ public class FirstFragment extends Fragment {
 
             }
         });
+        binding.txtPeixes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lista_animais", (ArrayList<Animal>) peixes);
+                bundle.putInt("indice_atual", 0);
+
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+            }
+        });
+        binding.txtAves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lista_animais", (ArrayList<Animal>) aves);
+                bundle.putInt("indice_atual", 0);
+
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+            }
+        });
+        binding.txtRepteis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lista_animais", (ArrayList<Animal>) repteis);
+                bundle.putInt("indice_atual", 0);
+
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+            }
+        });
+        binding.txtAnfibios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lista_animais", (ArrayList<Animal>) anfibios);
+                bundle.putInt("indice_atual", 0);
+
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+            }
+        });
 
     }
 
@@ -98,7 +142,7 @@ public class FirstFragment extends Fragment {
         aves.add(new Animal("Rolinha", R.drawable.rolinha, R.raw.rolinha));
 
         repteis.clear();
-        repteis.add(new Animal("Cobra Coral", R.drawable.coral, R.raw.cobracoral));
+        repteis.add(new Animal("Cobra-Coral", R.drawable.coral, R.raw.cobracoral));
         repteis.add(new Animal("Iguana", R.drawable.iguana, R.raw.iguana));
         repteis.add(new Animal("Sucuri", R.drawable.sucuri, R.raw.sucuri));
         repteis.add(new Animal("Tartaruga", R.drawable.tartaruga, R.raw.tartaruga));
@@ -124,7 +168,7 @@ public class FirstFragment extends Fragment {
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("lista_animais", (ArrayList<Animal>) lista);
-            bundle.putInt("indice_atual", 0);
+            bundle.putInt("indice_atual", position);
             
             NavHostFragment.findNavController(FirstFragment.this)
                     .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);

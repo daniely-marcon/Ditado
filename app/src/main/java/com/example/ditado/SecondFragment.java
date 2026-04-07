@@ -17,7 +17,10 @@ public class SecondFragment extends Fragment {
     private FragmentSecondBinding binding;
     private List<Animal> listaAnimais;
     private int indiceAtual = 0;
+
+    private int qtdElementos=0;
     private MediaPlayer mediaPlayer;
+    private int indiceInicial=0;
 
 
     @Override
@@ -43,7 +46,8 @@ public class SecondFragment extends Fragment {
 
         if (getArguments() != null) {
             listaAnimais = (List<Animal>) getArguments().getSerializable("lista_animais");
-            indiceAtual = getArguments().getInt("indice_atual");
+            indiceInicial= indiceAtual = getArguments().getInt("indice_atual");
+
         }
 
         if (listaAnimais != null) {
@@ -58,8 +62,11 @@ public class SecondFragment extends Fragment {
         });
 
         binding.btnTerminar.setOnClickListener(v -> {
+
             MainActivity atividadeMae = (MainActivity) getActivity();
+
             String resposta = binding.edtPalavra.getText().toString().trim();
+
             if (resposta.equalsIgnoreCase(listaAnimais.get(indiceAtual).getNome())) {
                 if (atividadeMae.aprendidos.stream().noneMatch(a -> a.getNome().equals(listaAnimais.get(indiceAtual).getNome()))) {
                     if(atividadeMae!=null){
@@ -68,13 +75,21 @@ public class SecondFragment extends Fragment {
 
                 }
                 indiceAtual++;
-                if (indiceAtual < listaAnimais.size()) {
-                    exibirAnimalAtual();
-                    binding.edtPalavra.setText(""); 
-                    binding.txtResult.setText("Muito bem! Próximo...");
+                qtdElementos++;
+                if (qtdElementos<listaAnimais.size()) {
+                    if(indiceAtual<listaAnimais.size()){
+                        exibirAnimalAtual();
+                        binding.edtPalavra.setText("");
+                        binding.txtResult.setText("Muito bem! Próximo...");
+                    }else{
+                        indiceAtual=0;
+                        exibirAnimalAtual();
+                        binding.edtPalavra.setText("");
+                        binding.txtResult.setText("Muito bem! Próximo...");
+                    }
 
+                } else{
 
-                } else {
                     binding.txtResult.setText("Parabéns! Você terminou a lista!");
 
                     NavHostFragment.findNavController(SecondFragment.this)
@@ -83,7 +98,7 @@ public class SecondFragment extends Fragment {
 
             } else {
                 binding.txtResult.setText("Errou, tente de novo!");
-                binding.txtResult.setTextColor(android.graphics.Color.parseColor("#FF0000"));
+
             }
         });
         binding.fabF2.setOnClickListener(new View.OnClickListener() {
