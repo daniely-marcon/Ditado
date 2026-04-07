@@ -24,12 +24,22 @@ public class SecondFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
     public void
     onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MainActivity main = (MainActivity) getActivity();
+
+        if(main!=null){
+            binding.txtResult.setTextSize(main.fonte);
+            binding.txtPalavra.setTextSize(main.fonte+10);
+            binding.btnTerminar.setTextSize(main.fonte);
+
+
+        }
 
         if (getArguments() != null) {
             listaAnimais = (List<Animal>) getArguments().getSerializable("lista_animais");

@@ -8,8 +8,8 @@
 
 
     <string-array name="fonte">
-        <item>Pequeno</item>
         <item>Padrão</item>
+        <item>Pequeno</item>
         <item>Grande</item>
     </string-array>
 

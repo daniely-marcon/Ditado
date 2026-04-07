@@ -35,12 +35,18 @@ public class TerceiroFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
-        MainActivity atividadeMae = (MainActivity) getActivity();
+        MainActivity main = (MainActivity) getActivity();
 
-        if (atividadeMae != null) {
 
-            AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), atividadeMae.aprendidos);
+        if (main != null) {
+
+
+            binding.txtEstatisticas.setTextSize(main.fonte+12);
+            binding.btnLimpar.setTextSize(main.fonte);
+
+            AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), main.aprendidos);
             binding.lvEstatisticas.setAdapter(meuAdaptador);
 
             binding.lvEstatisticas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,7 +57,7 @@ public class TerceiroFragment extends Fragment {
                         mediaPlayer.release();
                     }
 
-                    mediaPlayer = MediaPlayer.create(getContext(), atividadeMae.aprendidos.get(position).getAudioId());
+                    mediaPlayer = MediaPlayer.create(getContext(), main.aprendidos.get(position).getAudioId());
 
                     if (mediaPlayer != null) {
                         mediaPlayer.start();
@@ -70,7 +76,7 @@ public class TerceiroFragment extends Fragment {
             binding.btnLimpar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    atividadeMae.aprendidos.clear();
+                    main.aprendidos.clear();
                     meuAdaptador.notifyDataSetChanged();
                 }
             });

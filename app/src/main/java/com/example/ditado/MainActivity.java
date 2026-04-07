@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public ArrayList<Animal> aprendidos = new ArrayList<>();
 
+    public float fonte=18f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

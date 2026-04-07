@@ -10,15 +10,18 @@
 
     <TextView
         android:id="@+id/txtPalavra"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="62dp"
         android:text="Escreva a palavra corretamente"
         android:textAlignment="center"
         android:textColor="@color/destaque"
-        android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="80sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -32,8 +35,8 @@
 
     <EditText
         android:id="@+id/edtPalavra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="210dp"
+        android:layout_height="49dp"
         android:layout_marginStart="100sp"
         android:layout_marginTop="20sp"
         android:layout_marginEnd="100sp"
@@ -73,8 +76,8 @@
 
     <TextView
         android:id="@+id/txtResult"
-        android:layout_width="412sp"
-        android:layout_height="19sp"
+        android:layout_width="424dp"
+        android:layout_height="42dp"
         android:layout_marginTop="20sp"
         android:layout_marginEnd="15sp"
         android:textAlignment="center"

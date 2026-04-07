@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
@@ -47,9 +48,45 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_TerceiroFragment);
             }
         });
+
         ArrayAdapter<CharSequence> adaptadorSpinner =  ArrayAdapter.createFromResource(getContext(),R.array.fonte, R.layout.meu_item_spinner);
         adaptadorSpinner.setDropDownViewResource(R.layout.meu_item_spinner);
         binding.spinner.setAdapter(adaptadorSpinner);
+
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                MainActivity main = (MainActivity) getActivity();
+                if(main != null) {
+                    switch(position) {
+                        case 0:
+                            main.fonte = 18f;
+                            break;
+                        case 1:
+                            main.fonte = 14f;
+                            break;
+                        case 2:
+                            main.fonte = 22f;
+                            break;
+                    }
+
+                    binding.txtPeixes.setTextSize(main.fonte);
+                    binding.txtAves.setTextSize(main.fonte);
+                    binding.txtRepteis.setTextSize(main.fonte);
+                    binding.txtAnfibios.setTextSize(main.fonte);
+                    binding.txtSpinner.setTextSize(main.fonte);
+                    binding.txtTitulo.setTextSize(main.fonte + 12);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     private void inicializarDados() {
