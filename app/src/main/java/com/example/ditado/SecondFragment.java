@@ -72,6 +72,7 @@ public class SecondFragment extends Fragment {
                     exibirAnimalAtual();
                     binding.edtPalavra.setText(""); 
                     binding.txtResult.setText("Muito bem! Próximo...");
+                    binding.txtResult.setTextColor(android.graphics.Color.parseColor("#FE34A43A"));
 
 
                 } else {
