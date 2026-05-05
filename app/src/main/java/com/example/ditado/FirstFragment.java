@@ -23,6 +23,8 @@ public class FirstFragment extends Fragment {
     private List<Animal> peixes = new ArrayList<>();
     private List<Animal> anfibios = new ArrayList<>();
 
+    private List<Animal> mamiferos = new ArrayList<>();
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
@@ -39,6 +41,8 @@ public class FirstFragment extends Fragment {
         configurarGrid(binding.gvPeixes, peixes);
         configurarGrid(binding.gvAnfibios, anfibios);
         configurarGrid(binding.gvRepteis, repteis);
+        configurarGrid(binding.gvMamiferos, mamiferos);
+
 
         binding.fabF1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +164,15 @@ public class FirstFragment extends Fragment {
         anfibios.add(new Animal("Axolote", R.drawable.axolote, R.raw.axolote));
         anfibios.add(new Animal("Perereca", R.drawable.perereca, R.raw.perereca));
         anfibios.add(new Animal("Salamandra", R.drawable.salamandra, R.raw.salamandra));
+        anfibios.add(new Animal("Cobra-Cega", R.drawable.cobracega, R.raw.cobracega));
+
+        mamiferos.clear();
+        mamiferos.add(new Animal("Cachorro", R.drawable.cachorro, R.raw.cachorro));
+        mamiferos.add(new Animal("Vaca", R.drawable.vaca, R.raw.vaca));
+        mamiferos.add(new Animal("Gato", R.drawable.gato, R.raw.gato));
+        mamiferos.add(new Animal("Baleia", R.drawable.baleia, R.raw.baleia));
+        mamiferos.add(new Animal("Elefante", R.drawable.elefante, R.raw.elefante));
+
     }
 
     private void configurarGrid(GridView grid, List<Animal> lista) {

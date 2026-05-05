@@ -1,5 +1,6 @@
 package com.example.ditado;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -78,6 +79,7 @@ public class SecondFragment extends Fragment {
                 qtdElementos++;
                 if (qtdElementos<listaAnimais.size()) {
                     if(indiceAtual<listaAnimais.size()){
+                        binding.txtResult.setTextColor(Color.parseColor("#FE34A43A"));
                         exibirAnimalAtual();
                         binding.edtPalavra.setText("");
                         binding.txtResult.setText("Muito bem! Próximo...");
@@ -86,11 +88,13 @@ public class SecondFragment extends Fragment {
                         exibirAnimalAtual();
                         binding.edtPalavra.setText("");
                         binding.txtResult.setText("Muito bem! Próximo...");
+
                     }
 
                 } else{
 
                     binding.txtResult.setText("Parabéns! Você terminou a lista!");
+
 
                     NavHostFragment.findNavController(SecondFragment.this)
                             .navigate(R.id.action_SecondFragment_to_TerceiroFragment);
@@ -98,6 +102,7 @@ public class SecondFragment extends Fragment {
 
             } else {
                 binding.txtResult.setText("Errou, tente de novo!");
+                binding.txtResult.setTextColor(Color.parseColor("#FF0000"));
 
             }
         });

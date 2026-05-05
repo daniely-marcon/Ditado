@@ -9,11 +9,16 @@ public class Animal implements Serializable {
     private int imagemId; // ref para res/drawable
     private int audioId; // ref para res/raw
 
+    private String filoAnimal;
+
     public Animal(String nome, int imagemId, int audioId){
         this.nome = nome;
         this.imagemId = imagemId;
         this.audioId = audioId;
     }
+
+    public String getFiloAnimal(){  return filoAnimal; }
+
 
     public String getNome(){
         return nome;
