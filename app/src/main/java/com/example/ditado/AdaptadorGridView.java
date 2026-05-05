@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.ditado.entities.Animal;
+
 import java.util.List;
 
 public class AdaptadorGridView extends BaseAdapter {

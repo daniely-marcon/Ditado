@@ -3,23 +3,18 @@ package com.example.ditado;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ditado.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.ditado.entities.Animal;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

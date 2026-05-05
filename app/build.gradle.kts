@@ -1,3 +1,6 @@
+import org.gradle.accessors.dm.LibrariesForLibs
+
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -50,4 +53,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("androidx.room:room-common:2.6.1")
 }
