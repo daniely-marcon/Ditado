@@ -1,3 +1,6 @@
+import org.gradle.accessors.dm.LibrariesForLibs
+
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -39,6 +42,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -47,4 +53,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("androidx.room:room-common:2.6.1")
 }

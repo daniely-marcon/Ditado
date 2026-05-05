@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.ditado.databinding.FragmentFirstBinding;
+import com.example.ditado.entities.Animal;
+
 import java.util.ArrayList;
 import java.util.List;
 
