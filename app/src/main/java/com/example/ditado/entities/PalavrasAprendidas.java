@@ -1,10 +1,16 @@
 package com.example.ditado.entities;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 
 @Entity(primaryKeys = {"id_usuario", "id_animal"})
 public class PalavrasAprendidas {
+
+    @ForeignKey(entity = Usuario, parentColumns = "id_usuario", childColumns = "id_usuario")
     private int id_usuario;
+    @ForeignKey(entity = Animal, parentColumns = "id_animal", childColumns = "id_animal")
     private int id_animal;
 
     public PalavrasAprendidas(int id_usuario, int id_animal){

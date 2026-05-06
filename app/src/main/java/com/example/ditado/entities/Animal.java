@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class Animal implements Serializable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id_animal;
     private String nome_animal;
     private byte[] imagem_animal;
