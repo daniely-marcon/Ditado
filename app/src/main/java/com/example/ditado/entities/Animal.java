@@ -19,11 +19,11 @@ public class Animal implements Serializable {
         this.filo_animal=filo_animal;
     }
 
-    public int getId() { return id_animal; }
-    public void setId(int id) { this.id_animal = id_animal; }
+    public int getId_animal() { return id_animal; }
+    public void setId_animal(int id) { this.id_animal = id_animal; }
 
-    public String getNome(){ return nome_animal; }
-    public void setNome(String nome_animal) { this.nome_animal = nome_animal; }
+    public String getNome_animal(){ return nome_animal; }
+    public void setNome_animal(String nome_animal) { this.nome_animal = nome_animal; }
 
     public byte[] getAudio_animal(){ return audio_animal; }
     public void setAudio_animal(int audio_animal) { this.audio_animal = audio_animal; }

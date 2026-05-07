@@ -45,7 +45,9 @@ public class Usuario {
         return this.imagem_usuario;
     }
 
-
+    public String getNome_usuario() {
+        return nome_usuario;
+    }
 
     public String getTipo() {
         return tipo;

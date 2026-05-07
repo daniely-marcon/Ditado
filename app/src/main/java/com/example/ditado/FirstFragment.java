@@ -37,7 +37,7 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        inicializarDados();
+
 
         configurarGrid(binding.gvAves, aves);
         configurarGrid(binding.gvPeixes, peixes);
@@ -139,43 +139,7 @@ public class FirstFragment extends Fragment {
 
     }
 
-    private void inicializarDados() {
-        aves.clear();
-        aves.add(new Animal("Arara", R.drawable.arara, R.raw.arara));
-        aves.add(new Animal("Tucano", R.drawable.tucano, R.raw.tucano));
-        aves.add(new Animal("Beija-Flor", R.drawable.beijaflor, R.raw.beijaflor));
-        aves.add(new Animal("Papagaio", R.drawable.papagaio, R.raw.papagaio));
-        aves.add(new Animal("Rolinha", R.drawable.rolinha, R.raw.rolinha));
 
-        repteis.clear();
-        repteis.add(new Animal("Cobra-Coral", R.drawable.coral, R.raw.cobracoral));
-        repteis.add(new Animal("Iguana", R.drawable.iguana, R.raw.iguana));
-        repteis.add(new Animal("Sucuri", R.drawable.sucuri, R.raw.sucuri));
-        repteis.add(new Animal("Tartaruga", R.drawable.tartaruga, R.raw.tartaruga));
-        repteis.add(new Animal("Lagartixa", R.drawable.lagartixa, R.raw.lagartixa));
-
-        peixes.clear();
-        peixes.add(new Animal("Pirarucu", R.drawable.pirarucu, R.raw.pirarucu));
-        peixes.add(new Animal("Piau", R.drawable.piau, R.raw.piau));
-        peixes.add(new Animal("Dourado", R.drawable.dourado, R.raw.dourado));
-        peixes.add(new Animal("Piraputanga", R.drawable.piraputanga, R.raw.piraputanga));
-        peixes.add(new Animal("Bagre", R.drawable.bagre, R.raw.bagre));
-
-        anfibios.clear();
-        anfibios.add(new Animal("Sapo", R.drawable.sapo, R.raw.sapo));
-        anfibios.add(new Animal("Axolote", R.drawable.axolote, R.raw.axolote));
-        anfibios.add(new Animal("Perereca", R.drawable.perereca, R.raw.perereca));
-        anfibios.add(new Animal("Salamandra", R.drawable.salamandra, R.raw.salamandra));
-        anfibios.add(new Animal("Cobra-Cega", R.drawable.cobracega, R.raw.cobracega));
-
-        mamiferos.clear();
-        mamiferos.add(new Animal("Cachorro", R.drawable.cachorro, R.raw.cachorro));
-        mamiferos.add(new Animal("Vaca", R.drawable.vaca, R.raw.vaca));
-        mamiferos.add(new Animal("Gato", R.drawable.gato, R.raw.gato));
-        mamiferos.add(new Animal("Baleia", R.drawable.baleia, R.raw.baleia));
-        mamiferos.add(new Animal("Elefante", R.drawable.elefante, R.raw.elefante));
-
-    }
 
     private void configurarGrid(GridView grid, List<Animal> lista) {
         grid.setAdapter(new AdaptadorGridView(getContext(), lista.subList(0,4)));
