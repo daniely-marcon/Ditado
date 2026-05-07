@@ -21,37 +21,31 @@ public class Usuario {
         this.tipo=tipo;
     }
 
-    public void setNome(String nome_usuario){
-        this.nome_usuario=nome_usuario;
-    }
-    public String getNome(){
-        return this.nome_usuario;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setEmail(String email){
-        this.email=email;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
+
+
+
     public String getEmail(){
         return this.email;
     }
 
-    public void setSenha(String senha){
-        this.senha=senha;
-    }
+
     public String getSenha(){
         return this.senha;
     }
 
-    public void setImagem_usuario(byte[] imagem_usuario){
-        this.imagem_usuario=imagem_usuario;
-    }
+
     public byte[] getImagem_usuario(){
         return this.imagem_usuario;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+
 
     public String getTipo() {
         return tipo;
