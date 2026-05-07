@@ -31,22 +31,23 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupFilo" />
+        app:layout_constraintTop_toBottomOf="@+id/groupFilo"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <Button
         android:id="@+id/btnCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="148dp"
+        android:backgroundTint="@color/destaque"
         android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
     <EditText
@@ -67,6 +68,7 @@
         android:layout_marginTop="72dp"
         android:layout_marginEnd="99dp"
         android:text="Cadastre-se"
+        android:textColor="@color/destaque"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +81,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="148dp"
         android:text="Nome"
+        android:textColor="@color/destaque"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,6 +93,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="328dp"
         android:text="Email"
+        android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Senha"
+        android:textColor="@color/destaque"
         tools:layout_editor_absoluteX="48dp"
         tools:layout_editor_absoluteY="291dp" />
 
@@ -120,13 +125,15 @@
             android:id="@+id/radioAluno"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="Aluno" />
+            android:text="Aluno"
+            android:textColor="@color/destaque" />
 
         <RadioButton
             android:id="@+id/radioProfessor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Professor" />
+            android:text="Professor"
+            android:textColor="@color/destaque" />
     </RadioGroup>
 
     <TextView
@@ -137,6 +144,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="316dp"
         android:text="Você é:"
+        android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail2"
