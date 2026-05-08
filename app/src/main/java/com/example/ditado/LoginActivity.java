@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void Cadastrar() {
+    /*public void Cadastrar() {
         Intent it=new Intent(this, CadastroFragment.class);
         startActivity(it);
     }
@@ -43,5 +43,5 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this,"Usuario ou senha inválido!",Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }
