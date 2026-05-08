@@ -35,7 +35,12 @@ public class AdaptadorGridView extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        return null;
+    }
+ /*
+    @Override
+   public View getView(int position, View convertView, ViewGroup parent) {
         ImageView iv;
         if (convertView == null) {
             iv = new ImageView(ctx);
@@ -50,7 +55,7 @@ public class AdaptadorGridView extends BaseAdapter {
         iv.setImageResource(fotoDoAnimal);
 
         return iv;
-    }
+    }*/
 
 
     }

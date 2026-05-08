@@ -9,11 +9,13 @@ public class Animal implements Serializable {
     private int id_animal;
     private String nome_animal;
     private byte[] imagem_animal;
+    private byte[] audio_animal;
     private String filo_animal;
 
-    public Animal(String nome_animal, byte[] imagem_animal,String filo_animal){
+    public Animal(String nome_animal, byte[] imagem_animal, byte[] audio_animal,String filo_animal){
         this.nome_animal = nome_animal;
         this.imagem_animal = imagem_animal;
+        this.audio_animal = audio_animal;
         this.filo_animal=filo_animal;
     }
 
@@ -23,8 +25,11 @@ public class Animal implements Serializable {
     public String getNome_animal(){ return nome_animal; }
     public void setNome_animal(String nome_animal) { this.nome_animal = nome_animal; }
 
+    public byte[] getAudio_animal(){ return audio_animal; }
+    public void setAudio_animal(byte[] audio_animal) { this.audio_animal = audio_animal; }
+
     public byte[] getImagem_animal(){ return imagem_animal; }
-    public void setImagem_animal(int imagem_animal) { this.imagem_animal = imagem_animal; }
+    public void setImagem_animal(byte[] imagem_animal) { this.imagem_animal = imagem_animal; }
 
 
     public String getFilo_animal(){

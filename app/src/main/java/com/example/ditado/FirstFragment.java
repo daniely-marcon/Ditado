@@ -43,7 +43,7 @@ public class FirstFragment extends Fragment {
         configurarGrid(binding.gvPeixes, peixes);
         configurarGrid(binding.gvAnfibios, anfibios);
         configurarGrid(binding.gvRepteis, repteis);
-        configurarGrid(binding.gvMamiferos, mamiferos);
+        //configurarGrid(binding.gvMamiferos, mamiferos);
 
 
         binding.fabF1.setOnClickListener(new View.OnClickListener() {
@@ -67,23 +67,23 @@ public class FirstFragment extends Fragment {
                 if(main != null) {
                     switch(position) {
                         case 0:
-                            main.fonte = 18f;
+                           // main.fonte = 18f;
                             break;
                         case 1:
-                            main.fonte = 14f;
+                           // main.fonte = 14f;
                             break;
                         case 2:
-                            main.fonte = 22f;
+                           // main.fonte = 22f;
                             break;
                     }
-
+/*
                     binding.txtPeixes.setTextSize(main.fonte);
                     binding.txtAves.setTextSize(main.fonte);
                     binding.txtRepteis.setTextSize(main.fonte);
                     binding.txtAnfibios.setTextSize(main.fonte);
                     binding.txtSpinner.setTextSize(main.fonte);
                     binding.txtTitulo.setTextSize(main.fonte + 12);
-
+*/
                 }
             }
 

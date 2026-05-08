@@ -39,11 +39,11 @@ public class AdaptadorListView extends ArrayAdapter<Animal> {
         ImageView foto = convertView.findViewById(R.id.imgFotoLinha);
         TextView nome = convertView.findViewById(R.id.txtNomeLinha);
 
-        if (animalAtual != null) {
+       /* if (animalAtual != null) {
             foto.setImageResource(animalAtual.getImagemId()); // Ajuste se seu getter for diferente
             nome.setText(animalAtual.getNome());
         }
-
+        */
         return convertView;
     }
 }
