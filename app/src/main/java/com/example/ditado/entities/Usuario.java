@@ -52,4 +52,12 @@ public class Usuario {
     public String getTipo() {
         return tipo;
     }
+
+    public void setEmail(String email) {
+        this.email=email;
+    }
+
+    public void setSenha(String number) {
+
+    }
 }

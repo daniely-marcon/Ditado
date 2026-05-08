@@ -25,12 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        if (!usuarioEstaLogado()) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -46,10 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean usuarioEstaLogado() {
-        SharedPreferences preferences = getSharedPreferences("login_prefs", MODE_PRIVATE);
-        return preferences.getBoolean("logado", false);
-    }
 
     @Override
     public boolean onSupportNavigateUp() {

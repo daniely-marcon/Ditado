@@ -5,6 +5,9 @@
     <string name="first_fragment_label">Início</string>
     <string name="second_fragment_label">Aprendizado</string>
     <string name="terceiro_fragment_label">Estatísticas</string>
+    <string name="login_fragment_label">Login</string>
+    <string name="cadastro_fragment_label">Cadastro de Usuário</string>
+    <string name="reset_password_fragment_label">Mudar Senha do Usuário</string>
 
 
     <string-array name="fonte">
@@ -13,9 +16,8 @@
         <item>Grande</item>
     </string-array>
 
-
     <string name="titulo">Ditado</string>
-    <!-- TODO: Remove or change this placeholder text -->
+<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

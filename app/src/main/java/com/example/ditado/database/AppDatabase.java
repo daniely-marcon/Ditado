@@ -56,6 +56,12 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newSingleThreadExecutor().execute(() -> {
                 AnimalDao dao = INSTANCE.animalDao();
 
+                dao.insert(new Animal("Cobra-Coral", drawableToByteArray(mContext, R.drawable.coral),  "Répteis"));
+                dao.insert(new Animal("Iguana", drawableToByteArray(mContext, R.drawable.iguana), "Répteis"));
+                dao.insert(new Animal("Sucuri", drawableToByteArray(mContext, R.drawable.sucuri), "Répteis"));
+                dao.insert(new Animal("Tartaruga", drawableToByteArray(mContext, R.drawable.tartaruga), "Répteis"));
+                dao.insert(new Animal("Lagartixa", drawableToByteArray(mContext, R.drawable.lagartixa), "Répteis"));
+
                 dao.insert(new Animal("Arara", drawableToByteArray(mContext, R.drawable.arara), "Aves"));
                 dao.insert(new Animal("Tucano", drawableToByteArray(mContext, R.drawable.tucano), "Aves"));
                 dao.insert(new Animal("Beija-Flor", drawableToByteArray(mContext, R.drawable.beijaflor), "Aves"));
@@ -63,11 +69,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.insert(new Animal("Rolinha", drawableToByteArray(mContext, R.drawable.rolinha), "Aves"));
 
 
-                dao.insert(new Animal("Cobra-Coral", drawableToByteArray(mContext, R.drawable.coral),  "Répteis"));
-                dao.insert(new Animal("Iguana", drawableToByteArray(mContext, R.drawable.iguana), "Répteis"));
-                dao.insert(new Animal("Sucuri", drawableToByteArray(mContext, R.drawable.sucuri), "Répteis"));
-                dao.insert(new Animal("Tartaruga", drawableToByteArray(mContext, R.drawable.tartaruga), "Répteis"));
-                dao.insert(new Animal("Lagartixa", drawableToByteArray(mContext, R.drawable.lagartixa), "Répteis"));
+
 
 
                 dao.insert(new Animal("Pirarucu", drawableToByteArray(mContext, R.drawable.pirarucu), "Peixes"));

@@ -3,7 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LoginFragment">
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.ditado.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            />
+        <action
+            android:id="@+id/action_LoginFragment_to_CadastroFragment"
+            app:destination="@id/CadastroFragment"
+            />
+        <action
+            android:id="@+id/action_LoginFragment_to_ResetPasswordFragment"
+            app:destination="@id/ResetPasswordFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CadastroFragment"
+        android:name="com.example.ditado.CadastroFragment"
+        android:label="@string/cadastro_fragment_label"
+        tools:layout="@layout/fragment_cadastro">
+        <action
+            android:id="@+id/action_CadastroFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ResetPasswordFragment"
+        android:name="com.example.ditado.ResetPasswordFragment"
+        android:label="@string/reset_password_fragment_label"
+        tools:layout="@layout/fragment_reset_password">
+        <action
+            android:id="@+id/action_ResetPasswordFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -18,6 +59,7 @@
             android:id="@+id/action_FirstFragment_to_TerceiroFragment"
             app:destination="@id/TerceiroFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.ditado.SecondFragment"
@@ -43,4 +85,7 @@
             app:destination="@id/FirstFragment"
             />
     </fragment>
+
+
+
 </navigation>

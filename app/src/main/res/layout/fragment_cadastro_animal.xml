@@ -15,6 +15,7 @@
         android:layout_marginTop="72dp"
         android:text="Cadastrar Animal"
         android:textColor="@color/destaque"
+        android:background="@color/white"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
