@@ -23,74 +23,100 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/code"
+        android:id="@+id/txtCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="26dp"
         android:text="Código de Verificação"
         android:textColor="@color/destaque"
-        android:layout_marginTop="159dp"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="191dp" />
+        app:layout_constraintBottom_toTopOf="@+id/edtCode"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tituloLogin" />
 
     <EditText
+        android:id="@+id/edtCode"
         android:layout_width="260dp"
         android:layout_height="44dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="26dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/novasenha"
+        app:layout_constraintTop_toBottomOf="@+id/txtCode"
         tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="223dp" />
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin" />
 
     <TextView
         android:id="@+id/novasenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="26dp"
         android:text="Nova senha"
         android:textColor="@color/destaque"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="293dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/edtCode" />
 
     <EditText
+        android:id="@+id/editText2"
         android:layout_width="260dp"
         android:layout_height="44dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="26dp"
         android:ems="10"
         android:inputType="text"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintBottom_toTopOf="@+id/NovaSenha"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/novasenha" />
 
     <TextView
         android:id="@+id/NovaSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="26dp"
         android:text="Confirmar senha"
         android:textColor="@color/destaque"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="391dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="260dp"
         android:layout_height="44dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="26dp"
         android:ems="10"
         android:inputType="text"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="427dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnNovoCode"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/NovaSenha" />
 
     <Button
         android:id="@+id/btnNovoCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Novo código"
+        android:layout_marginTop="45dp"
         android:backgroundTint="@color/destaque"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="516dp" />
+        android:text="Novo código"
+        app:layout_constraintStart_toStartOf="@+id/tituloLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/btnConfirmar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="45dp"
         android:backgroundTint="@color/destaque"
         android:text="Confirmar"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="516dp" />
+        app:layout_constraintStart_toEndOf="@+id/btnNovoCode"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,7 @@ public class ResetPassActivity extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public resetPass() {
+    public ResetPassActivity() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class ResetPassActivity extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment resetPass.
+     * @return A new instance of fragment ResetPassActivity.
      */
     // TODO: Rename and change types and number of parameters
-    public static resetPass newInstance(String param1, String param2) {
-        resetPass fragment = new resetPass();
+    public static ResetPassActivity newInstance(String param1, String param2) {
+        ResetPassActivity fragment = new ResetPassActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

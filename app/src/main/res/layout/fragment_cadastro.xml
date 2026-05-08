@@ -7,31 +7,25 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edtEmail2"
-        android:layout_width="272dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
-
-    <EditText
         android:id="@+id/edtEmail"
+        android:inputType="textEmailAddress"
         android:layout_width="272dp"
         android:layout_height="40dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtSenha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        />
 
     <ImageView
         android:id="@+id/imgFoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="34dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -43,22 +37,29 @@
         android:id="@+id/btnCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="79dp"
         android:backgroundTint="@color/destaque"
         android:text="Cadastrar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
     <EditText
         android:id="@+id/edtNome"
+        android:inputType="text"
         android:layout_width="272dp"
         android:layout_height="40dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
     <TextView
         android:id="@+id/txtCadastro"
@@ -79,21 +80,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="48dp"
         android:text="Nome"
         android:textColor="@color/destaque"
+        app:layout_constraintBottom_toTopOf="@+id/edtNome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCadastro" />
 
     <TextView
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="48dp"
         android:layout_marginEnd="328dp"
         android:text="Email"
         android:textColor="@color/destaque"
+        app:layout_constraintBottom_toTopOf="@+id/edtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,52 +105,71 @@
         android:id="@+id/txtSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:text="Senha"
         android:textColor="@color/destaque"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="291dp" />
-
-    <RadioGroup
-        android:id="@+id/groupFilo"
-        android:layout_width="178dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="121dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenha"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail2"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail"
+        app:layout_constraintVertical_bias="0.055" />
 
-        <RadioButton
-            android:id="@+id/radioAluno"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Aluno"
-            android:textColor="@color/destaque" />
-
-        <RadioButton
-            android:id="@+id/radioProfessor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Professor"
-            android:textColor="@color/destaque" />
-    </RadioGroup>
+    <EditText
+        android:id="@+id/edtSenha"
+        android:inputType="text"
+        android:layout_width="272dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
 
     <TextView
         android:id="@+id/txtTIPOuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="316dp"
         android:text="Você é:"
         android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail2"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenha"
         tools:ignore="MissingConstraints" />
+
+    <RadioGroup
+        android:id="@+id/groupFilo"
+        android:layout_width="178dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginEnd="121dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTIPOuser"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="431dp">
+
+        <RadioButton
+            android:id="@+id/radioProfessor"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:text="Professor"
+            android:textColor="@color/destaque" />
+
+        <RadioButton
+            android:id="@+id/radioAluno"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:text="Aluno"
+            android:textColor="@color/destaque" />
+    </RadioGroup>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

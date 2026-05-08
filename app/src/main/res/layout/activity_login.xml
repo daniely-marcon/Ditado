@@ -11,13 +11,13 @@
         android:id="@+id/edtSenha"
         android:layout_width="231dp"
         android:layout_height="44dp"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="85dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
 
@@ -25,21 +25,23 @@
         android:id="@+id/btnEntrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="84dp"
-        android:text="Entrar"
         android:backgroundTint="@color/destaque"
+        android:text="Entrar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnCadastrar"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
     <Button
         android:id="@+id/btnCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="99dp"
         android:layout_marginTop="76dp"
-        android:text="Cadastrar"
         android:backgroundTint="@color/destaque"
+        android:text="Cadastrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
@@ -47,7 +49,7 @@
         android:id="@+id/txtResetPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
+        android:layout_marginStart="98dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="210dp"
         android:clickable="true"
@@ -55,7 +57,7 @@
         android:text="Recuperar Senha"
         android:textColor="#255995"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
@@ -63,7 +65,7 @@
         android:id="@+id/edtEmail"
         android:layout_width="231dp"
         android:layout_height="44dp"
-        android:layout_marginStart="99dp"
+        android:layout_marginStart="98dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="85dp"
         android:ems="10"
