@@ -28,8 +28,69 @@
         android:layout_height="wrap_content"
         android:text="Código de Verificação"
         android:textColor="@color/destaque"
+        android:layout_marginTop="159dp"
         tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="225dp" />
+        tools:layout_editor_absoluteY="191dp" />
+
+    <EditText
+        android:layout_width="260dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="223dp" />
+
+    <TextView
+        android:id="@+id/novasenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nova senha"
+        android:textColor="@color/destaque"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <EditText
+        android:layout_width="260dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <TextView
+        android:id="@+id/novasenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmar senha"
+        android:textColor="@color/destaque"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="391dp" />
+
+    <EditText
+        android:layout_width="260dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/btnResetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novo código"
+        android:backgroundTint="@color/destaque"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="516dp" />
+
+    <Button
+        android:id="@+id/btnResetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/destaque"
+        android:text="Confirmar"
+        tools:layout_editor_absoluteX="212dp"
+        tools:layout_editor_absoluteY="516dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
