@@ -46,8 +46,8 @@ public class TerceiroFragment extends Fragment {
             binding.txtEstatisticas.setTextSize(main.fonte+12);
             binding.btnLimpar.setTextSize(main.fonte);
 
-            AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), main.aprendidos);
-            binding.lvEstatisticas.setAdapter(meuAdaptador);
+            //AdaptadorListView meuAdaptador = new AdaptadorListView(getContext(), main.aprendidos);
+           // binding.lvEstatisticas.setAdapter(meuAdaptador);
 
             binding.lvEstatisticas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -57,7 +57,7 @@ public class TerceiroFragment extends Fragment {
                         mediaPlayer.release();
                     }
 
-                    mediaPlayer = MediaPlayer.create(getContext(), main.aprendidos.get(position).getAudioId());
+                    //mediaPlayer = MediaPlayer.create(getContext(), main.aprendidos.get(position).getAudioId());
 
                     if (mediaPlayer != null) {
                         mediaPlayer.start();
@@ -76,8 +76,8 @@ public class TerceiroFragment extends Fragment {
             binding.btnLimpar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    main.aprendidos.clear();
-                    meuAdaptador.notifyDataSetChanged();
+                 //   main.aprendidos.clear();
+                  //  meuAdaptador.notifyDataSetChanged();
                 }
             });
         }

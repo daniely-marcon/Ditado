@@ -26,10 +26,10 @@ public class Animal implements Serializable {
     public void setNome_animal(String nome_animal) { this.nome_animal = nome_animal; }
 
     public byte[] getAudio_animal(){ return audio_animal; }
-    public void setAudio_animal(int audio_animal) { this.audio_animal = audio_animal; }
+    public void setAudio_animal(byte[] audio_animal) { this.audio_animal = audio_animal; }
 
     public byte[] getImagem_animal(){ return imagem_animal; }
-    public void setImagem_animal(int imagem_animal) { this.imagem_animal = imagem_animal; }
+    public void setImagem_animal(byte[] imagem_animal) { this.imagem_animal = imagem_animal; }
 
 
     public String getFilo_animal(){
