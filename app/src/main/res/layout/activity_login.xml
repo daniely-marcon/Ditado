@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="99dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="273dp"
+        android:layout_marginEnd="282dp"
         android:text="Senha"
         android:textColor="@color/destaque"
         app:layout_constraintEnd_toEndOf="parent"
