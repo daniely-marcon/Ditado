@@ -56,38 +56,38 @@ public abstract class AppDatabase extends RoomDatabase {
             Executors.newSingleThreadExecutor().execute(() -> {
                 AnimalDao dao = INSTANCE.animalDao();
 
-                dao.insert(new Animal("Arara", drawableToByteArray(mContext, R.drawable.arara), rawToByteArray(mContext, R.raw.arara), "Aves"));
-                dao.insert(new Animal("Tucano", drawableToByteArray(mContext, R.drawable.tucano), rawToByteArray(mContext, R.raw.tucano), "Aves"));
-                dao.insert(new Animal("Beija-Flor", drawableToByteArray(mContext, R.drawable.beijaflor), rawToByteArray(mContext, R.raw.beijaflor), "Aves"));
-                dao.insert(new Animal("Papagaio", drawableToByteArray(mContext, R.drawable.papagaio), rawToByteArray(mContext, R.raw.papagaio), "Aves"));
-                dao.insert(new Animal("Rolinha", drawableToByteArray(mContext, R.drawable.rolinha), rawToByteArray(mContext, R.raw.rolinha), "Aves"));
+                dao.insert(new Animal("Arara", drawableToByteArray(mContext, R.drawable.arara), "Aves"));
+                dao.insert(new Animal("Tucano", drawableToByteArray(mContext, R.drawable.tucano), "Aves"));
+                dao.insert(new Animal("Beija-Flor", drawableToByteArray(mContext, R.drawable.beijaflor), "Aves"));
+                dao.insert(new Animal("Papagaio", drawableToByteArray(mContext, R.drawable.papagaio), "Aves"));
+                dao.insert(new Animal("Rolinha", drawableToByteArray(mContext, R.drawable.rolinha), "Aves"));
 
 
-                dao.insert(new Animal("Cobra-Coral", drawableToByteArray(mContext, R.drawable.coral), rawToByteArray(mContext, R.raw.cobracoral), "Répteis"));
-                dao.insert(new Animal("Iguana", drawableToByteArray(mContext, R.drawable.iguana), rawToByteArray(mContext, R.raw.iguana), "Répteis"));
-                dao.insert(new Animal("Sucuri", drawableToByteArray(mContext, R.drawable.sucuri), rawToByteArray(mContext, R.raw.sucuri), "Répteis"));
-                dao.insert(new Animal("Tartaruga", drawableToByteArray(mContext, R.drawable.tartaruga), rawToByteArray(mContext, R.raw.tartaruga), "Répteis"));
-                dao.insert(new Animal("Lagartixa", drawableToByteArray(mContext, R.drawable.lagartixa), rawToByteArray(mContext, R.raw.lagartixa), "Répteis"));
+                dao.insert(new Animal("Cobra-Coral", drawableToByteArray(mContext, R.drawable.coral),  "Répteis"));
+                dao.insert(new Animal("Iguana", drawableToByteArray(mContext, R.drawable.iguana), "Répteis"));
+                dao.insert(new Animal("Sucuri", drawableToByteArray(mContext, R.drawable.sucuri), "Répteis"));
+                dao.insert(new Animal("Tartaruga", drawableToByteArray(mContext, R.drawable.tartaruga), "Répteis"));
+                dao.insert(new Animal("Lagartixa", drawableToByteArray(mContext, R.drawable.lagartixa), "Répteis"));
 
 
-                dao.insert(new Animal("Pirarucu", drawableToByteArray(mContext, R.drawable.pirarucu), rawToByteArray(mContext, R.raw.pirarucu), "Peixes"));
-                dao.insert(new Animal("Piau", drawableToByteArray(mContext, R.drawable.piau), rawToByteArray(mContext, R.raw.piau), "Peixes"));
-                dao.insert(new Animal("Dourado", drawableToByteArray(mContext, R.drawable.dourado), rawToByteArray(mContext, R.raw.dourado), "Peixes"));
-                dao.insert(new Animal("Piraputanga", drawableToByteArray(mContext, R.drawable.piraputanga), rawToByteArray(mContext, R.raw.piraputanga), "Peixes"));
-                dao.insert(new Animal("Bagre", drawableToByteArray(mContext, R.drawable.bagre), rawToByteArray(mContext, R.raw.bagre), "Peixes"));
+                dao.insert(new Animal("Pirarucu", drawableToByteArray(mContext, R.drawable.pirarucu), "Peixes"));
+                dao.insert(new Animal("Piau", drawableToByteArray(mContext, R.drawable.piau), "Peixes"));
+                dao.insert(new Animal("Dourado", drawableToByteArray(mContext, R.drawable.dourado),  "Peixes"));
+                dao.insert(new Animal("Piraputanga", drawableToByteArray(mContext, R.drawable.piraputanga), "Peixes"));
+                dao.insert(new Animal("Bagre", drawableToByteArray(mContext, R.drawable.bagre), "Peixes"));
 
 
-                dao.insert(new Animal("Sapo", drawableToByteArray(mContext, R.drawable.sapo), rawToByteArray(mContext, R.raw.sapo), "Anfíbios"));
-                dao.insert(new Animal("Axolote", drawableToByteArray(mContext, R.drawable.axolote), rawToByteArray(mContext, R.raw.axolote), "Anfíbios"));
-                dao.insert(new Animal("Perereca", drawableToByteArray(mContext, R.drawable.perereca), rawToByteArray(mContext, R.raw.perereca), "Anfíbios"));
-                dao.insert(new Animal("Salamandra", drawableToByteArray(mContext, R.drawable.salamandra), rawToByteArray(mContext, R.raw.salamandra), "Anfíbios"));
+                dao.insert(new Animal("Sapo", drawableToByteArray(mContext, R.drawable.sapo), "Anfíbios"));
+                dao.insert(new Animal("Axolote", drawableToByteArray(mContext, R.drawable.axolote),  "Anfíbios"));
+                dao.insert(new Animal("Perereca", drawableToByteArray(mContext, R.drawable.perereca), "Anfíbios"));
+                dao.insert(new Animal("Salamandra", drawableToByteArray(mContext, R.drawable.salamandra), "Anfíbios"));
 
 
-                dao.insert(new Animal("Cachorro", drawableToByteArray(mContext, R.drawable.cachorro), rawToByteArray(mContext, R.raw.cachorro), "Mamíferos"));
-                dao.insert(new Animal("Vaca", drawableToByteArray(mContext, R.drawable.vaca), rawToByteArray(mContext, R.raw.vaca), "Mamíferos"));
-                dao.insert(new Animal("Gato", drawableToByteArray(mContext, R.drawable.gato), rawToByteArray(mContext, R.raw.gato), "Mamíferos"));
-                dao.insert(new Animal("Baleia", drawableToByteArray(mContext, R.drawable.baleia), rawToByteArray(mContext, R.raw.baleia), "Mamíferos"));
-                dao.insert(new Animal("Elefante", drawableToByteArray(mContext, R.drawable.elefante), rawToByteArray(mContext, R.raw.elefante), "Mamíferos"));
+                dao.insert(new Animal("Cachorro", drawableToByteArray(mContext, R.drawable.cachorro),  "Mamíferos"));
+                dao.insert(new Animal("Vaca", drawableToByteArray(mContext, R.drawable.vaca), "Mamíferos"));
+                dao.insert(new Animal("Gato", drawableToByteArray(mContext, R.drawable.gato),  "Mamíferos"));
+                dao.insert(new Animal("Baleia", drawableToByteArray(mContext, R.drawable.baleia),  "Mamíferos"));
+                dao.insert(new Animal("Elefante", drawableToByteArray(mContext, R.drawable.elefante),  "Mamíferos"));
 
             });
         }
@@ -101,15 +101,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return stream.toByteArray();
     }
 
-    private static byte[] rawToByteArray(Context context, int resId) {
-        try {
-            InputStream is = context.getResources().openRawResource(resId);
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            return buffer;
-        } catch (IOException e) {
-            return new byte[0];
-        }
-    }
+
 }
