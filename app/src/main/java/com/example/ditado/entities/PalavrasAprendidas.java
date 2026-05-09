@@ -2,7 +2,6 @@ package com.example.ditado.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
 
 
 @Entity(primaryKeys = {"id_usuario", "id_animal"},

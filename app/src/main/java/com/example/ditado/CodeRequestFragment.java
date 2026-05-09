@@ -1,64 +1,102 @@
 package com.example.ditado;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CodeRequestFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.ditado.database.AppDatabase;
+import com.example.ditado.databinding.FragmentCodeRequestBinding;
+import com.example.ditado.entities.Usuario;
+
+import java.util.Random;
+
 public class CodeRequestFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentCodeRequestBinding binding;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public CodeRequestFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CodeRequestFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CodeRequestFragment newInstance(String param1, String param2) {
-        CodeRequestFragment fragment = new CodeRequestFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+       binding = FragmentCodeRequestBinding.inflate(inflater, container, false);
+       return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.btnEnviarCODE.setOnClickListener(v -> {
+            String email = binding.edtEmail.getText().toString().trim();
+
+            if (email.isEmpty()) {
+                Toast.makeText(getContext(), "Por favor, insira seu e-mail", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+                Usuario usuario = db.usuarioDao().buscarUsuario(email,"");
+
+                requireActivity().runOnUiThread(() -> {
+                    if (usuario == null) {
+                        Toast.makeText(getContext(), "E-mail não encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Geração do código (6 dígitos)
+                        String codigoGerado = String.valueOf(new Random().nextInt(899999) + 100000);
+
+                        // Abre o app de e-mail
+                        sendEmailSingleRecipient(email, "Código de Verificação", "Seu código é: " + codigoGerado);
+
+                        // Passa o código para a próxima tela via bundle
+                        Bundle args = new Bundle();
+                        args.putString("codigoEnviado", codigoGerado);
+                        args.putString("email", email);
+
+                        NavHostFragment.findNavController(this)
+                                .navigate(R.id.action_CodeRequestFragment_to_ResetPasswordFragment, args);
+                    }
+                });
+            }).start();
+        });
+
+        binding.btnVoltarCODE.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_CodeRequestFragment_to_LoginFragment);
+        });
+    }
+
+    // Metodo para enviar email
+    public void sendEmailSingleRecipient(String recipient, String subject, String htmlBody) {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient}); // Single recipient
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+        // Adding HTML body
+        emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(htmlBody);
+        emailIntent.setType("text/html");
+
+        try {
+            startActivity(emailIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getContext(), "Não há aplicativos de e-mail instalados.", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_code_request, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

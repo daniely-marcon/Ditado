@@ -2,7 +2,6 @@ package com.example.ditado.database;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -19,8 +18,6 @@ import com.example.ditado.entities.PalavrasAprendidas;
 import com.example.ditado.entities.Usuario;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Usuario.class, Animal.class, PalavrasAprendidas.class}, version = 1)

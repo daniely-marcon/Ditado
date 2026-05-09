@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
 import com.example.ditado.entities.Animal;
 import com.example.ditado.entities.PalavrasAprendidas;
 

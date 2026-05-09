@@ -1,8 +1,9 @@
 package com.example.ditado.entities;
 
-import java.io.Serializable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 @Entity
 public class Animal implements Serializable {
     @PrimaryKey(autoGenerate = true)

@@ -21,6 +21,10 @@ public interface UsuarioDao {
     @Query("SELECT * FROM Usuario WHERE email= :email and senha = :senha")
     Usuario buscarUsuario(String email, String senha);
 
+    @Query("SELECT * FROM Usuario WHERE email= :email")
+    Usuario buscarUsuario(String email);
+
+
     @Insert
     void insert(Usuario usuario);
 

@@ -25,6 +25,9 @@
             android:id="@+id/action_LoginFragment_to_ResetPasswordFragment"
             app:destination="@id/ResetPasswordFragment"
             />
+        <action
+            android:id="@+id/action_LoginFragment_to_CodeRequestFragment"
+            app:destination="@id/CodeRequestFragment" />
     </fragment>
 
 
@@ -51,6 +54,14 @@
             android:id="@+id/action_ResetPasswordFragment_to_LoginFragment"
             app:destination="@id/LoginFragment"
             />
+        <action
+            android:id="@+id/action_ResetPasswordFragment_to_CodeRequestFragment"
+            app:destination="@id/CodeRequestFragment"
+            app:popUpTo="@id/CodeRequestFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="codigoEnviado"
+            app:argType="string" />
     </fragment>
 
     <!-- Tela  Menu -->
@@ -118,10 +129,10 @@
         tools:layout="@layout/fragment_code_request">
         <action
             android:id="@+id/action_CodeRequestFragment_to_LoginFragment"
-                app:destination="@+id/LoginFragment"/>
-    <action
-        android:id="@+id/action_CodeRequestFragment_to_ResetPasswordFragment"
-        app:destination="@id/ResetPasswordFragment"/>
+                app:destination="@id/LoginFragment"/>
+        <action
+            android:id="@+id/action_CodeRequestFragment_to_ResetPasswordFragment"
+            app:destination="@id/ResetPasswordFragment"/>
     </fragment>
 
 
