@@ -20,13 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Inserir Email  -->
-
-
-    <!-- Confirmar pedido de código  -->
-
-
-    <!-- B2 Voltar pagina -->
+   <!-- Email-->
 
     <TextView
         android:id="@+id/txtCampo_Email"
@@ -39,6 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCODE_Request" />
 
+    <!-- Inserir Email  -->
+
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="272dp"
@@ -48,6 +44,8 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCampo_Email" />
+
+    <!-- Confirmar pedido de código  -->
 
     <Button
         android:id="@+id/btnCadastrarAnimal"
@@ -60,6 +58,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnVoltar_CODE"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
+    <!-- B2 Voltar pagina -->
     <Button
         android:id="@+id/btnVoltar_CODE"
         android:layout_width="wrap_content"

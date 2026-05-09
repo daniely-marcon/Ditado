@@ -5,6 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/LoginFragment">
 
+
+    <!-- Tela de Login -->
+
     <fragment
         android:id="@+id/LoginFragment"
         android:name="com.example.ditado.LoginFragment"
@@ -24,6 +27,8 @@
             />
     </fragment>
 
+
+    <!-- Tela de Cadastro  User -->
     <fragment
         android:id="@+id/CadastroFragment"
         android:name="com.example.ditado.CadastroFragment"
@@ -35,6 +40,8 @@
             />
     </fragment>
 
+    <!-- Tela de Recuperação de sneha/ Nova Senha -->
+
     <fragment
         android:id="@+id/ResetPasswordFragment"
         android:name="com.example.ditado.ResetPasswordFragment"
@@ -45,6 +52,8 @@
             app:destination="@id/LoginFragment"
             />
     </fragment>
+
+    <!-- Tela  Menu -->
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -60,6 +69,7 @@
             app:destination="@id/TerceiroFragment" />
     </fragment>
 
+    <!-- Tela Principal - Jogo -->
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.ditado.SecondFragment"
@@ -75,6 +85,8 @@
             />
 
     </fragment>
+
+    <!-- Tela Palavras Aprendidas -->
     <fragment
         android:id="@+id/TerceiroFragment"
         android:name="com.example.ditado.TerceiroFragment"
@@ -84,6 +96,32 @@
             android:id="@+id/action_TerceiroFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"
             />
+    </fragment>
+
+    <!-- Tela de Cadastro de Animal -->
+    <fragment
+        android:id="@+id/CadastroAnimalFragment"
+        android:name="com.example.ditado.CadastroAnimalFragment"
+        android:label="@string/cadastro_animal_fragment_label"
+        tools:layout="@layout/fragment_cadastro_animal">
+        <action
+            android:id="@+id/action_CadastroAnimalFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"/>
+
+    </fragment>
+
+    <!-- Tela de Pedido de Código  -->
+    <fragment
+        android:id="@+id/CodeRequestFragment"
+        android:name="com.example.ditado.CodeRequestFragment"
+        android:label="@string/code_request_fragment_label"
+        tools:layout="@layout/fragment_code_request">
+        <action
+            android:id="@+id/action_CodeRequestFragment_to_LoginFragment"
+                app:destination="@+id/LoginFragment"/>
+    <action
+        android:id="@+id/action_CodeRequestFragment_to_ResetPasswordFragment"
+        app:destination="@id/ResetPasswordFragment"/>
     </fragment>
 
 
