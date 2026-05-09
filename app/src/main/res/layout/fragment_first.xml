@@ -1,161 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/txtTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginEnd="173sp"
-        android:text="@string/titulo"
-        android:textColor="@color/destaque"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="252sp"
-        android:layout_marginTop="12sp"
-        android:layout_marginEnd="41sp"
-        android:backgroundTint="@color/white"
-        android:contextClickable="false"
-        android:foregroundTint="@color/white"
-        android:popupBackground="@color/white"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <GridView
-        android:id="@+id/gvAves"
-        android:layout_width="165sp"
-        android:layout_height="167sp"
-        android:layout_marginStart="28sp"
-        android:layout_marginTop="77sp"
-        android:layout_marginEnd="30sp"
-        android:gravity="center"
-        android:numColumns="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gvPeixes"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
 
-    <TextView
-        android:id="@+id/txtPeixes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68sp"
-        android:layout_marginTop="8sp"
-        android:text="Peixes"
-        android:textColor="@color/destaque"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gvPeixes" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="80dp">
 
-    <GridView
-        android:id="@+id/gvPeixes"
-        android:layout_width="165sp"
-        android:layout_height="167sp"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="77sp"
-        android:layout_marginEnd="28sp"
-        android:gravity="center"
-        android:numColumns="2"
-        app:layout_constraintEnd_toStartOf="@+id/gvAves"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="173sp"
+                android:text="@string/titulo"
+                android:textColor="@color/destaque"
+                android:textSize="40sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtAves"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="76sp"
-        android:text="Aves"
-        android:textColor="@color/destaque"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gvAves" />
+            <TextView
+                android:id="@+id/txtSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="210sp"
+                android:layout_marginTop="20sp"
+                android:text="Tamanho da fonte"
+                android:textColor="@color/destaque"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
-    <GridView
-        android:id="@+id/gvAnfibios"
-        android:layout_width="165sp"
-        android:layout_height="167sp"
-        android:layout_marginStart="28sp"
-        android:layout_marginTop="40sp"
-        android:layout_marginEnd="30sp"
-        android:gravity="center"
-        android:numColumns="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gvRepteis"
-        app:layout_constraintTop_toBottomOf="@+id/txtAves" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="252sp"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="41sp"
+                android:backgroundTint="@color/white"
+                android:contextClickable="false"
+                android:foregroundTint="@color/white"
+                android:popupBackground="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
 
-    <TextView
-        android:id="@+id/txtAnfibios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12sp"
-        android:layout_marginEnd="58sp"
-        android:text="Anfíbios"
-        android:textColor="@color/destaque"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gvAnfibios" />
 
-    <GridView
-        android:id="@+id/gvRepteis"
-        android:layout_width="165sp"
-        android:layout_height="167sp"
-        android:layout_marginStart="30sp"
-        android:layout_marginTop="40sp"
-        android:layout_marginEnd="28sp"
-        android:gravity="center"
-        android:numColumns="2"
-        app:layout_constraintEnd_toStartOf="@+id/gvAnfibios"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPeixes" />
+            <TextView
+                android:id="@+id/txtPeixes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="68sp"
+                android:layout_marginTop="8sp"
+                android:text="Peixes"
+                android:textColor="@color/destaque"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gvPeixes" />
 
-    <TextView
-        android:id="@+id/txtRepteis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55sp"
-        android:layout_marginTop="13sp"
-        android:text="Repteis"
-        android:textColor="@color/destaque"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gvRepteis" />
+            <GridView
+                android:id="@+id/gvPeixes"
+                android:layout_width="165dp"
+                android:layout_height="167dp"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="77sp"
+                android:layout_marginEnd="28sp"
+                android:gravity="center"
+                android:numColumns="2"
+                app:layout_constraintEnd_toStartOf="@+id/gvAves"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
 
-    <TextView
-        android:id="@+id/txtSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="210sp"
-        android:layout_marginTop="20sp"
-        android:text="Tamanho da fonte"
-        android:textColor="@color/destaque"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+
+            <TextView
+                android:id="@+id/txtAves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
+                android:layout_marginEnd="76sp"
+                android:text="Aves"
+                android:textColor="@color/destaque"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gvAves" />
+
+            <GridView
+                android:id="@+id/gvAves"
+                android:layout_width="165sp"
+                android:layout_height="167sp"
+                android:layout_marginStart="28sp"
+                android:layout_marginTop="77sp"
+                android:layout_marginEnd="30sp"
+                android:gravity="center"
+                android:numColumns="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gvPeixes"
+                app:layout_constraintTop_toBottomOf="@+id/txtSpinner" />
+
+
+            <TextView
+                android:id="@+id/txtRepteis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="12dp"
+                android:text="Repteis"
+                android:textColor="@color/destaque"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gvRepteis" />
+
+            <GridView
+                android:id="@+id/gvRepteis"
+                android:layout_width="165sp"
+                android:layout_height="167sp"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="28sp"
+                android:gravity="center"
+                android:numColumns="2"
+                app:layout_constraintEnd_toStartOf="@+id/gvAnfibios"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPeixes" />
+
+            <!-- ANFÍBIOS -->
+            <TextView
+                android:id="@+id/txtAnfibios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="58sp"
+                android:text="Anfíbios"
+                android:textColor="@color/destaque"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gvAnfibios" />
+
+            <GridView
+                android:id="@+id/gvAnfibios"
+                android:layout_width="165sp"
+                android:layout_height="167sp"
+                android:layout_marginStart="28sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30sp"
+                android:gravity="center"
+                android:numColumns="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gvRepteis"
+                app:layout_constraintTop_toBottomOf="@+id/txtAves" />
+
+            <!-- MAMÍFEROS -->
+            <TextView
+                android:id="@+id/txtMamiferos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="267dp"
+                android:text="Mamíferos"
+                android:textColor="@color/destaque"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gvMamiferos" />
+
+            <GridView
+                android:id="@+id/gvMamiferos"
+                android:layout_width="165sp"
+                android:layout_height="167sp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="236dp"
+                android:gravity="center"
+                android:numColumns="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRepteis"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabF1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_marginEnd="30sp"
         android:layout_marginBottom="30sp"
         android:foregroundTint="@color/white"

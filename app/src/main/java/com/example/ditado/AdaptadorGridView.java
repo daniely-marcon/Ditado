@@ -18,8 +18,8 @@ public class AdaptadorGridView extends BaseAdapter {
     private List<Animal> list;
 
     public AdaptadorGridView(Context ctx, List<Animal> list){
-        this.ctx=ctx;
-        this.list=list;
+        this.ctx = ctx;
+        this.list = list;
     }
 
     @Override
@@ -41,35 +41,36 @@ public class AdaptadorGridView extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView iv;
 
-
         if (convertView == null) {
             iv = new ImageView(ctx);
 
-            iv.setLayoutParams(new GridView.LayoutParams(250, 250));
-            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setPadding(8, 8, 8, 8);
-        } else {
 
+
+            int alturaEmPixels = (int) (82 * ctx.getResources().getDisplayMetrics().density);
+
+
+            iv.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, alturaEmPixels));
+
+
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+        } else {
             iv = (ImageView) convertView;
         }
-
 
         Animal animalAtual = list.get(position);
 
         if (animalAtual != null) {
-
             byte[] imagemBytes = animalAtual.getImagem_animal();
-
 
             if (imagemBytes != null && imagemBytes.length > 0) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(imagemBytes, 0, imagemBytes.length);
                 iv.setImageBitmap(bitmap);
             } else {
-
                 iv.setImageResource(R.drawable.ic_launcher_background);
             }
         }
-
 
         return iv;
     }

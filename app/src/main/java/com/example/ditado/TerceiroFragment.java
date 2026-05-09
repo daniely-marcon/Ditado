@@ -1,10 +1,14 @@
 package com.example.ditado;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -37,7 +41,6 @@ public class TerceiroFragment extends Fragment {
         configurarTTS();
 
         if (main != null) {
-
             binding.txtEstatisticas.setTextSize(main.fonte + 12);
             binding.btnLimpar.setTextSize(main.fonte);
 
@@ -49,33 +52,59 @@ public class TerceiroFragment extends Fragment {
                 falarPalavra(nome);
             });
 
-
             binding.fabF3.setOnClickListener(v ->
                     NavHostFragment.findNavController(TerceiroFragment.this)
                             .navigate(R.id.action_TerceiroFragment_to_FirstFragment)
             );
 
 
-            binding.btnLimpar.setOnClickListener(v -> {
-                listaConcluidos.clear();
-                if (meuAdaptador != null) {
-                    meuAdaptador.notifyDataSetChanged();
-                }
-            });
+            binding.btnLimpar.setOnClickListener(v -> limparHistoricoDoBanco());
         }
     }
 
     private void carregarDadosDoBanco() {
+        // 1. Pega o ID do aluno logado
+        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+        int idUsuario = pref.getInt("id_usuario", -1);
 
-        AppDatabase db = AppDatabase.getDatabase(requireContext());
+        if (idUsuario != -1) {
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
 
-        // Aqui você pode criar um método no DAO chamado getAllAnimais()
-        // Ou usar o buscarPorFilo se quiser mostrar um grupo específico
-        listaConcluidos = db.animalDao().getAll();
 
-        if (listaConcluidos != null) {
-            meuAdaptador = new AdaptadorListView(getContext(), listaConcluidos);
-            binding.lvEstatisticas.setAdapter(meuAdaptador);
+                List<Animal> concluidosDb = db.palavrasAprendidasDao().getPalavrasPorUsuario(idUsuario);
+
+
+                requireActivity().runOnUiThread(() -> {
+                    listaConcluidos.clear();
+                    if (concluidosDb != null) {
+                        listaConcluidos.addAll(concluidosDb);
+                    }
+                    meuAdaptador = new AdaptadorListView(getContext(), listaConcluidos);
+                    binding.lvEstatisticas.setAdapter(meuAdaptador);
+                });
+            }).start();
+        }
+    }
+
+    private void limparHistoricoDoBanco() {
+        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+        int idUsuario = pref.getInt("id_usuario", -1);
+
+        if (idUsuario != -1) {
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+
+                db.palavrasAprendidasDao().ApagarPalavrasUsuario(idUsuario);
+
+                requireActivity().runOnUiThread(() -> {
+                    listaConcluidos.clear();
+                    if (meuAdaptador != null) {
+                        meuAdaptador.notifyDataSetChanged();
+                    }
+                    Toast.makeText(getContext(), "Histórico apagado com sucesso!", Toast.LENGTH_SHORT).show();
+                });
+            }).start();
         }
     }
 
