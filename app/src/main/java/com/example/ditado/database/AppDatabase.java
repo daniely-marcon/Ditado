@@ -71,7 +71,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
 
-
                 dao.insert(new Animal("Pirarucu", drawableToByteArray(mContext, R.drawable.pirarucu), "Peixes"));
                 dao.insert(new Animal("Piau", drawableToByteArray(mContext, R.drawable.piau), "Peixes"));
                 dao.insert(new Animal("Dourado", drawableToByteArray(mContext, R.drawable.dourado),  "Peixes"));
@@ -95,12 +94,39 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
-    // Métodos auxiliares de conversão (Necessários para transformar recursos em byte[])
     private static byte[] drawableToByteArray(Context context, int resId) {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
+        try {
+            android.graphics.drawable.Drawable drawable = androidx.core.content.ContextCompat.getDrawable(context, resId);
+            if (drawable == null) return new byte[0];
+
+            int width = drawable.getIntrinsicWidth();
+            int height = drawable.getIntrinsicHeight();
+
+
+            if (width > 300) {
+                float ratio = (float) height / width;
+                width = 300;
+                height = (int) (width * ratio);
+            }
+            if (width <= 0) width = 150;
+            if (height <= 0) height = 150;
+
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            android.graphics.Canvas canvas = new android.graphics.Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            return stream.toByteArray();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return new byte[0];
+        }
     }
 
 

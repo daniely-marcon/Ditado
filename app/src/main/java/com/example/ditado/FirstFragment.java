@@ -73,6 +73,7 @@ public class FirstFragment extends Fragment {
                     if (!peixes.isEmpty()) configurarGrid(binding.gvPeixes, peixes);
                     if (!anfibios.isEmpty()) configurarGrid(binding.gvAnfibios, anfibios);
                     if (!repteis.isEmpty()) configurarGrid(binding.gvRepteis, repteis);
+                    if(!mamiferos.isEmpty()) configurarGrid(binding.gvMamiferos, mamiferos);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -100,6 +101,7 @@ public class FirstFragment extends Fragment {
         binding.txtAves.setOnClickListener(v -> irParaJogo(aves, 0));
         binding.txtRepteis.setOnClickListener(v -> irParaJogo(repteis, 0));
         binding.txtAnfibios.setOnClickListener(v -> irParaJogo(anfibios, 0));
+        binding.txtMamiferos.setOnClickListener(v->irParaJogo(mamiferos,0));
     }
 
     private void irParaJogo(List<Animal> lista, int indice) {
@@ -136,7 +138,9 @@ public class FirstFragment extends Fragment {
                     binding.txtAves.setTextSize(main.fonte);
                     binding.txtRepteis.setTextSize(main.fonte);
                     binding.txtAnfibios.setTextSize(main.fonte);
-                    binding.txtTitulo.setTextSize(main.fonte + 8f);
+                    binding.txtTitulo.setTextSize(main.fonte*2f);
+                    binding.txtMamiferos.setTextSize(main.fonte);
+
                 }
             }
             @Override public void onNothingSelected(AdapterView<?> parent) {}
