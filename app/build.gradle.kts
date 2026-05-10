@@ -1,8 +1,6 @@
 import org.gradle.accessors.dm.LibrariesForLibs
 
 
-val LibrariesForLibs.camerax: Any
-
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -60,8 +58,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.room:room-common:2.6.1")
-    implementation(libs.camerax.camera2)
-    implementation(libs.camerax.lifecycle)
-    implementation(libs.camerax.video)
+
 
 }

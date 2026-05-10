@@ -57,10 +57,5 @@ public class Usuario {
         this.email=email;
     }
 
-    public void setSenha(String number) {
-
-    }
-
-    public void atualizarSenha(String novaSenha, Usuario usuario) {
-    }
+    public void setSenha(String number) { this.senha=senha; }
 }
