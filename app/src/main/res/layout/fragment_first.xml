@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -144,7 +143,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPeixes" />
 
-            <!-- ANFÍBIOS -->
+
             <TextView
                 android:id="@+id/txtAnfibios"
                 android:layout_width="wrap_content"
@@ -170,7 +169,7 @@
                 app:layout_constraintStart_toEndOf="@+id/gvRepteis"
                 app:layout_constraintTop_toBottomOf="@+id/txtAves" />
 
-            <!-- MAMÍFEROS -->
+
             <TextView
                 android:id="@+id/txtMamiferos"
                 android:layout_width="wrap_content"
@@ -199,9 +198,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtRepteis"
                 tools:ignore="MissingConstraints" />
 
+            <Switch
+                android:id="@+id/swc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="130dp"
+                android:layout_marginEnd="100dp"
+                android:checked="true"
+                android:text="Agrupado "
+                android:textColor="@color/destaque"
+                android:textSize="16sp"
+                android:thumbTint="@color/destaque"
+                android:trackTint="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
+    <ListView
+        android:id="@+id/lvAnimais"
+        android:layout_width="wrap_content"
+        android:layout_height="570dp"
+        android:layout_marginTop="180dp"
+        android:scrollIndicators="bottom"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp">
+
+    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabF1"

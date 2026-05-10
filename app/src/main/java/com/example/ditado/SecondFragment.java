@@ -74,7 +74,7 @@ public class SecondFragment extends Fragment {
         binding.btnTerminar.setOnClickListener(v -> validarResposta());
 
         binding.fabF2.setOnClickListener(v ->
-                NavHostFragment.findNavController(this).navigate(R.id.action_SecondFragment_to_FirstFragment)
+                NavHostFragment.findNavController(this).navigate(R.id.action_SecondFragment_to_TerceiroFragment)
         );
     }
 

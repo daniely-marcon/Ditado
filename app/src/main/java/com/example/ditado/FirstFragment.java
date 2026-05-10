@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,12 +25,13 @@ import java.util.List;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-
+    private AdaptadorListView meuAdaptador;
     private List<Animal> aves = new ArrayList<>();
     private List<Animal> repteis = new ArrayList<>();
     private List<Animal> peixes = new ArrayList<>();
     private List<Animal> anfibios = new ArrayList<>();
     private List<Animal> mamiferos = new ArrayList<>();
+    private List<Animal> todos = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +52,39 @@ public class FirstFragment extends Fragment {
 
         configurarCliquesCategorias();
         configurarSpinnerFonte();
+
+        binding.swc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
+                if(binding.swc.isChecked()){
+                    binding.gvAnfibios.setVisibility(getView().VISIBLE);
+                    binding.gvAves.setVisibility(getView().VISIBLE);
+                    binding.gvPeixes.setVisibility(getView().VISIBLE);
+                    binding.gvRepteis.setVisibility(getView().VISIBLE);
+                    binding.gvMamiferos.setVisibility(getView().VISIBLE);
+                    binding.txtPeixes.setVisibility(getView().VISIBLE);
+                    binding.txtAves.setVisibility(getView().VISIBLE);
+                    binding.txtRepteis.setVisibility(getView().VISIBLE);
+                    binding.txtAnfibios.setVisibility(getView().VISIBLE);
+                    binding.txtMamiferos.setVisibility(getView().VISIBLE);
+                    binding.lvAnimais.setVisibility(getView().GONE);
+                }else{
+                    binding.swc.setText("Listado");
+                    binding.gvAnfibios.setVisibility(getView().GONE);
+                    binding.gvAves.setVisibility(getView().GONE);
+                    binding.gvPeixes.setVisibility(getView().GONE);
+                    binding.gvRepteis.setVisibility(getView().GONE);
+                    binding.gvMamiferos.setVisibility(getView().GONE);
+                    binding.txtPeixes.setVisibility(getView().GONE);
+                    binding.txtAves.setVisibility(getView().GONE);
+                    binding.txtRepteis.setVisibility(getView().GONE);
+                    binding.txtAnfibios.setVisibility(getView().GONE);
+                    binding.txtMamiferos.setVisibility(getView().GONE);
+                    binding.lvAnimais.setVisibility(getView().VISIBLE);
+                }
+            }
+        });
+
     }
 
     private void carregarDadosDoBanco() {
@@ -61,6 +97,7 @@ public class FirstFragment extends Fragment {
                 List<Animal> tempAnfibios = db.animalDao().buscarPorFilo("Anfíbios");
                 List<Animal> tempRepteis = db.animalDao().buscarPorFilo("Répteis");
                 List<Animal> tempMamiferos = db.animalDao().buscarPorFilo("Mamíferos");
+                List<Animal> tempTodos = db.animalDao().getAll();
 
                 requireActivity().runOnUiThread(() -> {
                     if (tempAves != null) aves = tempAves;
@@ -68,12 +105,14 @@ public class FirstFragment extends Fragment {
                     if (tempAnfibios != null) anfibios = tempAnfibios;
                     if (tempRepteis != null) repteis = tempRepteis;
                     if (tempMamiferos != null) mamiferos = tempMamiferos;
+                    if(tempTodos!=null)  todos = tempTodos;
 
                     if (!aves.isEmpty()) configurarGrid(binding.gvAves, aves);
                     if (!peixes.isEmpty()) configurarGrid(binding.gvPeixes, peixes);
                     if (!anfibios.isEmpty()) configurarGrid(binding.gvAnfibios, anfibios);
                     if (!repteis.isEmpty()) configurarGrid(binding.gvRepteis, repteis);
                     if(!mamiferos.isEmpty()) configurarGrid(binding.gvMamiferos, mamiferos);
+                    if(!todos.isEmpty()) configurarList(binding.lvAnimais, todos);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -81,11 +120,23 @@ public class FirstFragment extends Fragment {
         }).start();
     }
 
+    private void configurarList(ListView list, List<Animal> todos){
+        if (todos == null || todos.isEmpty()) {
+            list.setVisibility(View.GONE);
+            return;
+        }
+        list.setAdapter(new AdaptadorListView(getContext(),todos));
+        binding.lvAnimais.setOnItemClickListener((parent, v, position, id) -> {
+            irParaJogo(todos, position);
+        });
+    }
     private void configurarGrid(GridView grid, List<Animal> lista) {
         if (lista == null || lista.isEmpty()) {
             grid.setVisibility(View.GONE);
             return;
         }
+
+
 
         int limite = Math.min(lista.size(), 4);
 
@@ -115,6 +166,11 @@ public class FirstFragment extends Fragment {
 
         NavHostFragment.findNavController(this).navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
     }
+
+
+
+
+
 
     private void configurarSpinnerFonte() {
         ArrayAdapter<CharSequence> adaptadorSpinner = ArrayAdapter.createFromResource(

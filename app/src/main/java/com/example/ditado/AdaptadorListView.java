@@ -35,9 +35,11 @@ public class AdaptadorListView extends ArrayAdapter<Animal> {
 
         ImageView foto = convertView.findViewById(R.id.imgFotoLinha);
         TextView nome = convertView.findViewById(R.id.txtNomeLinha);
+        TextView filo = convertView.findViewById(R.id.txtFilo);
 
         if (animalAtual != null) {
-            nome.setText(animalAtual.getNome_animal());
+
+            filo.setText(animalAtual.getFilo_animal());
 
 
             byte[] imagemBytes = animalAtual.getImagem_animal();
