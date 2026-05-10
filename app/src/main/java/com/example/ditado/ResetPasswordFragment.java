@@ -55,7 +55,7 @@ public class ResetPasswordFragment extends Fragment {
                         String email = getArguments().getString("email");
                         db = AppDatabase.getDatabase(requireContext());
 
-                        Usuario usuario = db.usuarioDao().buscarUsuario(email, "");
+                        Usuario usuario = db.usuarioDao().buscarUsuario(email);
 
                         if (usuario != null) {
                             usuario.setSenha(novaSenha);
