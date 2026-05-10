@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ditado">
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
