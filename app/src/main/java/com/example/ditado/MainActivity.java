@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (telaAtual == R.id.LoginFragment ||
                     telaAtual == R.id.CadastroFragment ||
-                    telaAtual == R.id.ResetPasswordFragment) {
+                    telaAtual == R.id.ResetPasswordFragment ||
+                    telaAtual == R.id.CodeRequestFragment ) {
 
                 appBarLayout.setVisibility(View.GONE);
 

@@ -48,14 +48,23 @@ public class LoginFragment extends Fragment {
 
             fazerLogin(email, senha);
         });
+
+        binding.btnCadastrar.setOnClickListener(v ->
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_LoginFragment_to_CadastroFragment));
+
+        binding.txtResetPass.setOnClickListener(v ->
+                        NavHostFragment.findNavController(LoginFragment.this)
+                                .navigate(R.id.action_LoginFragment_to_CodeRequestFragment));
+
     }
 
     private void criarUsuarioPadrao() {
         new Thread(() -> {
-            Usuario userTeste = db.usuarioDao().buscarUsuario("aluno@teste.com","123");
+            Usuario userTeste = db.usuarioDao().buscarUsuario("daniellymaximo13@gmail.com","123");
 
             if (userTeste == null) {
-                Usuario novoUser = new Usuario("Teste","aluno@teste.com","123",null,"Aluno");
+                Usuario novoUser = new Usuario("Teste","daniellymaximo13@gmail.com","123",null,"Aluno");
                 db.usuarioDao().insert(novoUser);
             }
         }).start();
