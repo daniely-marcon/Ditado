@@ -75,10 +75,10 @@ public class ResetPasswordFragment extends Fragment {
 
             } else {
                 Toast.makeText(getContext(), "Código de verificação incorreto!", Toast.LENGTH_SHORT).show();
-                // Opcional: NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_LoginFragment);
+                NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_CodeRequestFragment);
             }
         });
-    } // Fechamento do onViewCreated que estava faltando
+    }
 
     @Override
     public void onDestroyView() {
