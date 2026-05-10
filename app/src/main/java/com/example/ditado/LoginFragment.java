@@ -48,6 +48,15 @@ public class LoginFragment extends Fragment {
 
             fazerLogin(email, senha);
         });
+
+        binding.btnCadastrar.setOnClickListener(v ->
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_LoginFragment_to_CadastroFragment));
+
+        binding.txtResetPass.setOnClickListener(v ->
+                        NavHostFragment.findNavController(LoginFragment.this)
+                                .navigate(R.id.action_LoginFragment_to_CodeRequestFragment));
+
     }
 
     private void criarUsuarioPadrao() {
