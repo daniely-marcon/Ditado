@@ -8,7 +8,7 @@
     android:background="@color/white">
 
     <EditText
-        android:id="@+id/edtEmail"
+        android:id="@+id/edtEmail_User"
         android:inputType="textEmailAddress"
         android:layout_width="272dp"
         android:layout_height="40dp"
@@ -31,11 +31,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupFilo"
+        app:layout_constraintTop_toBottomOf="@+id/groupTipo"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <Button
-        android:id="@+id/btnCadastrar"
+            android:id="@+id/btnCadastrar_User"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
     <EditText
-        android:id="@+id/edtNome"
+        android:id="@+id/edtNome_User"
         android:inputType="text"
         android:layout_width="272dp"
         android:layout_height="40dp"
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNome" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNome_User" />
 
     <TextView
         android:id="@+id/txtSenha"
@@ -107,11 +107,11 @@
         android:textColor="@color/destaque"
         app:layout_constraintBottom_toTopOf="@+id/edtSenha"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail_User"
         app:layout_constraintVertical_bias="0.055" />
 
     <EditText
-        android:id="@+id/edtSenha"
+        android:id="@+id/edtSenha_User"
         android:inputType="text"
         android:layout_width="272dp"
         android:layout_height="40dp"
@@ -132,11 +132,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenha"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenha_User"
         tools:ignore="MissingConstraints" />
 
     <RadioGroup
-        android:id="@+id/groupFilo"
+        android:id="@+id/groupTipo"
         android:layout_width="178dp"
         android:layout_height="50dp"
         android:layout_marginStart="121dp"
@@ -167,7 +167,7 @@
 
     <!-- B2 Voltar pagina -->
     <Button
-        android:id="@+id/btnVoltar_CODE"
+        android:id="@+id/btnVoltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -175,7 +175,7 @@
         android:layout_marginEnd="53dp"
         android:backgroundTint="@color/destaque"
         android:text="Voltar"
-        app:layout_constraintEnd_toStartOf="@+id/btnCadastrar"
+        app:layout_constraintEnd_toStartOf="@+id/btnCadastrar_User"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
