@@ -84,7 +84,7 @@ public class CodeRequestFragment extends Fragment {
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
 
         // Adding HTML body
-        emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(htmlBody);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(htmlBody));
         emailIntent.setType("text/html");
 
         try {
