@@ -8,16 +8,26 @@
 
     <ImageView
         android:id="@+id/imgFotoLinha"
+        android:layout_marginStart="15sp"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/txtNomeLinha"
-        android:layout_width="wrap_content"
+        android:layout_width="140sp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15sp"
-        android:textSize="20sp"
-        android:textColor="@color/destaque" />
+        android:textColor="@color/destaque"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtFilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:text="Filo do Animal"
+        android:textColor="@color/destaque"
+        android:textSize="18sp" />
 
 </LinearLayout>

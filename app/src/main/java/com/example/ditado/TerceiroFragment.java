@@ -49,7 +49,8 @@ public class TerceiroFragment extends Fragment {
 
             binding.lvEstatisticas.setOnItemClickListener((adapterView, v, position, l) -> {
                 String nome = listaConcluidos.get(position).getNome_animal();
-                falarPalavra(nome);
+                String filo =listaConcluidos.get(position).getFilo_animal();
+                falarPalavra(nome+" do filo "+filo);
             });
 
             binding.fabF3.setOnClickListener(v ->
@@ -63,7 +64,7 @@ public class TerceiroFragment extends Fragment {
     }
 
     private void carregarDadosDoBanco() {
-        // 1. Pega o ID do aluno logado
+
         SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
         int idUsuario = pref.getInt("id_usuario", -1);
 
