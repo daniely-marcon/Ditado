@@ -60,4 +60,7 @@ public class Usuario {
     public void setSenha(String number) {
 
     }
+
+    public void atualizarSenha(String novaSenha, Usuario usuario) {
+    }
 }
