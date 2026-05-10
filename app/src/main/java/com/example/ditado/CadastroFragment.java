@@ -1,11 +1,16 @@
 package com.example.ditado;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -27,7 +32,15 @@ public class CadastroFragment extends Fragment {
         binding = FragmentCodeRequestBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
-    }
+    }/*
+
+    private static final int CAMERA_PERMISSION_CODE=1;
+    ActivityResultLauncher<Uri> takePictureLauncher;
+    Uri imageUri;
+    private EditText edtNome, edtEmail, edtSenha;
+    private ImageView imgFoto;
+    private Bitmap fotoBitmap;
+    private AppDatabase db;
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -36,8 +49,8 @@ public class CadastroFragment extends Fragment {
         binding.btnCadastrar_User.setOnClickListener(v -> {
             String nome = binding.edtNome_User.getText().toString().trim();
             String email = binding.edtEmail_User.getText().toString().trim();
-            String senha = binding.edtSenha.getText().toString().trim();
-            Byte
+            String senha = binding.edtSenha_User.getText().toString().trim();
+            ImageView foto = binding.imgFoto;
             String tipo = binding.groupTipo.getCheckedRadioButtonId() == R.id.radioProfessor.isChecked() ? "Professor" : "Aluno";
 
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) || tipo.isEmpty()){
@@ -52,5 +65,5 @@ public class CadastroFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 }
