@@ -46,7 +46,7 @@ public class CodeRequestFragment extends Fragment {
 
             new Thread(() -> {
                 AppDatabase db = AppDatabase.getDatabase(requireContext());
-                Usuario usuario = db.usuarioDao().buscarUsuario(email,"");
+                Usuario usuario = db.usuarioDao().buscarUsuario(email);
 
                 requireActivity().runOnUiThread(() -> {
                     if (usuario == null) {
