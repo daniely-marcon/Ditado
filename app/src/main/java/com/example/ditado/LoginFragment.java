@@ -61,10 +61,10 @@ public class LoginFragment extends Fragment {
 
     private void criarUsuarioPadrao() {
         new Thread(() -> {
-            Usuario userTeste = db.usuarioDao().buscarUsuario("aluno@teste.com","123");
+            Usuario userTeste = db.usuarioDao().buscarUsuario("daniellymaximo13@gmail.com","123");
 
             if (userTeste == null) {
-                Usuario novoUser = new Usuario("Teste","aluno@teste.com","123",null,"Aluno");
+                Usuario novoUser = new Usuario("Teste","daniellymaximo13@gmail.com","123",null,"Aluno");
                 db.usuarioDao().insert(novoUser);
             }
         }).start();
