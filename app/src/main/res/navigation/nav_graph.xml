@@ -22,10 +22,6 @@
             app:destination="@id/CadastroFragment"
             />
         <action
-            android:id="@+id/action_LoginFragment_to_ResetPasswordFragment"
-            app:destination="@id/ResetPasswordFragment"
-            />
-        <action
             android:id="@+id/action_LoginFragment_to_CodeRequestFragment"
             app:destination="@id/CodeRequestFragment" />
     </fragment>

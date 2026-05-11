@@ -169,6 +169,7 @@ public class CadastroAnimalFragment extends Fragment {
 
     private void confirmarExclusao(Animal animal) {
         new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+
                 .setTitle("Excluir Animal")
                 .setMessage("Tem certeza que deseja remover o " + animal.getNome_animal() + "? Esta ação não pode ser desfeita.")
                 .setPositiveButton("Sim, Excluir", (dialog, which) -> {

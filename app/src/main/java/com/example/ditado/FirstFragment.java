@@ -29,7 +29,6 @@ import java.util.List;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private AdaptadorListView meuAdaptador;
     private List<Animal> aves = new ArrayList<>();
     private List<Animal> repteis = new ArrayList<>();
     private List<Animal> peixes = new ArrayList<>();
@@ -78,6 +77,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
                 if(binding.swc.isChecked()){
+                    binding.swc.setText("Agrupado");
                     binding.gvAnfibios.setVisibility(getView().VISIBLE);
                     binding.gvAves.setVisibility(getView().VISIBLE);
                     binding.gvPeixes.setVisibility(getView().VISIBLE);
@@ -172,27 +172,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void configurarCliquesCategorias() {
-        binding.txtPeixes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (usuarioLogado != null && usuarioLogado.getTipo() != null) {
-
-                    if (usuarioLogado.getTipo().equals("Aluno")) {
-                       irParaJogo(peixes, 0);
-                    } else {
-                        Intent it = new Intent();
-
-                        NavHostFragment.findNavController(FirstFragment.this)
-                                .navigate(R.id.action_FirstFragment_to_CadastroAnimalFragment);
-                    }
-
-                } else {
-
-                    Toast.makeText(getContext(), "Carregando dados, aguarde um segundo...", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
+        binding.txtPeixes.setOnClickListener(v->irParaJogo(peixes,0));
         binding.txtAves.setOnClickListener(v -> irParaJogo(aves, 0));
         binding.txtRepteis.setOnClickListener(v -> irParaJogo(repteis, 0));
         binding.txtAnfibios.setOnClickListener(v -> irParaJogo(anfibios, 0));
