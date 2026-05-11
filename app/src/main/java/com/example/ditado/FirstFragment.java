@@ -1,5 +1,8 @@
 package com.example.ditado;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.ditado.database.AppDatabase;
 import com.example.ditado.databinding.FragmentFirstBinding;
 import com.example.ditado.entities.Animal;
+import com.example.ditado.entities.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +29,13 @@ import java.util.List;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private AdaptadorListView meuAdaptador;
     private List<Animal> aves = new ArrayList<>();
     private List<Animal> repteis = new ArrayList<>();
     private List<Animal> peixes = new ArrayList<>();
     private List<Animal> anfibios = new ArrayList<>();
     private List<Animal> mamiferos = new ArrayList<>();
     private List<Animal> todos = new ArrayList<>();
+    private Usuario usuarioLogado;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,11 +48,27 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         carregarDadosDoBanco();
+        recuperarDadosUsuario();
 
-        binding.fabF1.setOnClickListener(v ->
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_TerceiroFragment)
-        );
+        binding.fabF1.setOnClickListener(v -> {
+
+
+            if (usuarioLogado != null && usuarioLogado.getTipo() != null) {
+
+                if (usuarioLogado.getTipo().equals("Aluno")) {
+                    NavHostFragment.findNavController(FirstFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_TerceiroFragment);
+
+                } else {
+                    NavHostFragment.findNavController(FirstFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_CadastroAnimalFragment);
+                }
+
+            } else {
+
+                Toast.makeText(getContext(), "Carregando dados, aguarde um segundo...", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         configurarCliquesCategorias();
         configurarSpinnerFonte();
@@ -57,6 +77,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
                 if(binding.swc.isChecked()){
+                    binding.swc.setText("Agrupado");
                     binding.gvAnfibios.setVisibility(getView().VISIBLE);
                     binding.gvAves.setVisibility(getView().VISIBLE);
                     binding.gvPeixes.setVisibility(getView().VISIBLE);
@@ -99,6 +120,7 @@ public class FirstFragment extends Fragment {
                 List<Animal> tempMamiferos = db.animalDao().buscarPorFilo("Mamíferos");
                 List<Animal> tempTodos = db.animalDao().getAll();
 
+
                 requireActivity().runOnUiThread(() -> {
                     if (tempAves != null) aves = tempAves;
                     if (tempPeixes != null) peixes = tempPeixes;
@@ -114,6 +136,8 @@ public class FirstFragment extends Fragment {
                     if(!mamiferos.isEmpty()) configurarGrid(binding.gvMamiferos, mamiferos);
                     if(!todos.isEmpty()) configurarList(binding.lvAnimais, todos);
                 });
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -148,7 +172,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void configurarCliquesCategorias() {
-        binding.txtPeixes.setOnClickListener(v -> irParaJogo(peixes, 0));
+        binding.txtPeixes.setOnClickListener(v->irParaJogo(peixes,0));
         binding.txtAves.setOnClickListener(v -> irParaJogo(aves, 0));
         binding.txtRepteis.setOnClickListener(v -> irParaJogo(repteis, 0));
         binding.txtAnfibios.setOnClickListener(v -> irParaJogo(anfibios, 0));
@@ -156,18 +180,69 @@ public class FirstFragment extends Fragment {
     }
 
     private void irParaJogo(List<Animal> lista, int indice) {
+
         if (lista == null || lista.isEmpty()) {
             Toast.makeText(getContext(), "Nenhum animal nesta categoria!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("lista_animais", new ArrayList<>(lista));
-        bundle.putInt("indice_atual", indice);
 
-        NavHostFragment.findNavController(this).navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+
+        if (usuarioLogado == null) {
+            Toast.makeText(getContext(), "Aguarde um segundo, carregando permissões...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if (usuarioLogado.getTipo().equals("Aluno")) {
+
+            Bundle bundleJogo = new Bundle();
+            bundleJogo.putSerializable("lista_animais", new ArrayList<>(lista));
+            bundleJogo.putInt("indice_atual", indice);
+
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_FirstFragment_to_SecondFragment, bundleJogo);
+
+        }
+
+        else {
+            Animal animalSelecionado = lista.get(indice);
+            Bundle bundleEdicao = new Bundle();
+
+            bundleEdicao.putInt("id_animal_editar", animalSelecionado.getId_animal());
+
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_FirstFragment_to_CadastroAnimalFragment, bundleEdicao);
+        }
     }
 
+    private void recuperarDadosUsuario() {
+        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+        int idUsuario = pref.getInt("id_usuario", -1);
 
+        if (idUsuario != -1) {
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+                usuarioLogado = db.usuarioDao().getUsuarioById(idUsuario);
+
+                if (usuarioLogado != null) {
+
+                    requireActivity().runOnUiThread(() -> {
+
+                        if (usuarioLogado.getTipo().equals("Aluno")) {
+
+                            binding.fabF1.setImageResource(R.drawable.icons8_trophy_32);
+
+                        } else {
+
+                            binding.fabF1.setImageResource(android.R.drawable.ic_input_add);
+
+                        }
+
+                    });
+                }
+            }).start();
+        }
+    }
 
 
 

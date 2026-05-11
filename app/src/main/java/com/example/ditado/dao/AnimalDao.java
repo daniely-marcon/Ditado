@@ -18,7 +18,7 @@ public interface AnimalDao {
     List<Animal> getAll();
 
     @Query("SELECT * FROM Animal WHERE id_animal = :id")
-    List<Animal> getById(int id);
+    Animal getById(int id);
 
     @Query("SELECT * FROM Animal WHERE filo_animal = :filo")
     List<Animal> buscarPorFilo(String filo);

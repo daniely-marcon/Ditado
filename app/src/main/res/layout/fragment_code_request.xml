@@ -43,6 +43,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="80dp"
         android:inputType="text"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCampo_Email" />
 
@@ -56,6 +57,7 @@
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/destaque"
         android:text="Enviar Código"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/btnVoltar_CODE"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
@@ -68,6 +70,7 @@
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/destaque"
         android:text="Voltar"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 

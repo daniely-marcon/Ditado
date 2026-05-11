@@ -6,7 +6,7 @@
     app:startDestination="@id/LoginFragment">
 
 
-    <!-- Tela de Login -->
+
 
     <fragment
         android:id="@+id/LoginFragment"
@@ -22,16 +22,12 @@
             app:destination="@id/CadastroFragment"
             />
         <action
-            android:id="@+id/action_LoginFragment_to_ResetPasswordFragment"
-            app:destination="@id/ResetPasswordFragment"
-            />
-        <action
             android:id="@+id/action_LoginFragment_to_CodeRequestFragment"
             app:destination="@id/CodeRequestFragment" />
     </fragment>
 
 
-    <!-- Tela de Cadastro  User -->
+
     <fragment
         android:id="@+id/CadastroFragment"
         android:name="com.example.ditado.CadastroFragment"
@@ -43,7 +39,7 @@
             />
     </fragment>
 
-    <!-- Tela de Recuperação de sneha/ Nova Senha -->
+
 
     <fragment
         android:id="@+id/ResetPasswordFragment"
@@ -64,7 +60,7 @@
             app:argType="string" />
     </fragment>
 
-    <!-- Tela  Menu -->
+
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -78,9 +74,12 @@
         <action
             android:id="@+id/action_FirstFragment_to_TerceiroFragment"
             app:destination="@id/TerceiroFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_CadastroAnimalFragment"
+            app:destination="@id/CadastroAnimalFragment" />
     </fragment>
 
-    <!-- Tela Principal - Jogo -->
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.ditado.SecondFragment"
@@ -97,7 +96,7 @@
 
     </fragment>
 
-    <!-- Tela Palavras Aprendidas -->
+
     <fragment
         android:id="@+id/TerceiroFragment"
         android:name="com.example.ditado.TerceiroFragment"
@@ -109,7 +108,7 @@
             />
     </fragment>
 
-    <!-- Tela de Cadastro de Animal -->
+
     <fragment
         android:id="@+id/CadastroAnimalFragment"
         android:name="com.example.ditado.CadastroAnimalFragment"
@@ -121,7 +120,7 @@
 
     </fragment>
 
-    <!-- Tela de Pedido de Código  -->
+
     <fragment
         android:id="@+id/CodeRequestFragment"
         android:name="com.example.ditado.CodeRequestFragment"
