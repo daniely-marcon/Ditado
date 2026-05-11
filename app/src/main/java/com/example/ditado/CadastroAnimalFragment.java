@@ -1,63 +1,203 @@
 package com.example.ditado;
 
+import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CadastroAnimalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.ditado.database.AppDatabase;
+import com.example.ditado.databinding.FragmentCadastroAnimalBinding;
+import com.example.ditado.entities.Animal;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class CadastroAnimalFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentCadastroAnimalBinding binding;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CadastroAnimalFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CadastroAnimalActivity.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CadastroAnimalFragment newInstance(String param1, String param2) {
-        CadastroAnimalFragment fragment = new CadastroAnimalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private int idAnimalAtual = -1;
+    private byte[] imagemSelecionadaBytes = null;
+    private ActivityResultLauncher<String> abrirGaleriaLauncher;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentCadastroAnimalBinding.inflate(inflater, container, false);
+
+        abrirGaleriaLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                uri -> {
+                    if (uri != null) {
+                        try {
+                            InputStream inputStream = requireContext().getContentResolver().openInputStream(uri);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            binding.imgFoto.setImageBitmap(bitmap);
+                            imagemSelecionadaBytes = bitmapToByteArray(bitmap);
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(), "Erro ao carregar imagem", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+        return binding.getRoot();
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        ArrayAdapter<CharSequence> adaptadorSpinner = ArrayAdapter.createFromResource(
+                getContext(), R.array.filo, R.layout.meu_item_spinner);
+        adaptadorSpinner.setDropDownViewResource(R.layout.meu_item_spinner);
+        binding.spinFilo.setAdapter(adaptadorSpinner);
+
+
+        if (getArguments() != null && getArguments().containsKey("id_animal_editar")) {
+
+            int idParaEditar = getArguments().getInt("id_animal_editar");
+            idAnimalAtual = idParaEditar;
+
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+                Animal animalSelect = db.animalDao().getById(idParaEditar);
+
+                if (animalSelect != null) {
+                    requireActivity().runOnUiThread(() -> {
+
+
+                        binding.edtNomeAnimal.setText(animalSelect.getNome_animal());
+
+
+                        imagemSelecionadaBytes = animalSelect.getImagem_animal();
+
+
+                        String filoDoBanco = animalSelect.getFilo_animal();
+                        if (filoDoBanco != null) {
+                            int posicaoSpinner = adaptadorSpinner.getPosition(filoDoBanco);
+                            if (posicaoSpinner >= 0) {
+                                binding.spinFilo.setSelection(posicaoSpinner);
+                            }
+                        }
+
+
+                        if (imagemSelecionadaBytes != null && imagemSelecionadaBytes.length > 0) {
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(imagemSelecionadaBytes, 0, imagemSelecionadaBytes.length);
+                            binding.imgFoto.setImageBitmap(bitmap);
+                        }
+
+
+                        binding.txtCadastro.setText("Edite as Informações");
+                        binding.btnCadastrarAnimal.setText("Atualizar");
+
+
+                        binding.btnExcluir.setVisibility(View.VISIBLE);
+                        binding.btnExcluir.setOnClickListener(v -> confirmarExclusao(animalSelect));
+                    });
+                }
+            }).start();
+
+        } else {
+            binding.btnExcluir.setVisibility(View.GONE);
         }
+
+
+        binding.imgFoto.setOnClickListener(v -> {
+            abrirGaleriaLauncher.launch("image/*");
+        });
+
+
+        binding.btnCadastrarAnimal.setOnClickListener(v -> {
+
+            String nomeDigitado = binding.edtNomeAnimal.getText().toString().trim();
+            String filoSelecionado = binding.spinFilo.getSelectedItem().toString();
+
+
+            if (nomeDigitado.isEmpty()) {
+                Toast.makeText(getContext(), "Digite o nome do animal!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (imagemSelecionadaBytes == null) {
+                Toast.makeText(getContext(), "Selecione uma imagem para o animal!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+
+
+                Animal animal = new Animal(nomeDigitado,  imagemSelecionadaBytes, filoSelecionado);
+
+                if (idAnimalAtual == -1) {
+
+                    db.animalDao().insert(animal);
+                } else {
+
+                    animal.setId_animal(idAnimalAtual);
+                    db.animalDao().update(animal);
+                }
+
+
+                requireActivity().runOnUiThread(() -> {
+                    String mensagem = (idAnimalAtual == -1) ? "Cadastrado com sucesso!" : "Atualizado com sucesso!";
+                    Toast.makeText(getContext(), mensagem, Toast.LENGTH_SHORT).show();
+                    NavHostFragment.findNavController(this).popBackStack();
+                });
+
+            }).start();
+        });
+    }
+
+
+    private void confirmarExclusao(Animal animal) {
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Excluir Animal")
+                .setMessage("Tem certeza que deseja remover o " + animal.getNome_animal() + "? Esta ação não pode ser desfeita.")
+                .setPositiveButton("Sim, Excluir", (dialog, which) -> {
+
+                    new Thread(() -> {
+                        AppDatabase db = AppDatabase.getDatabase(requireContext());
+                        db.animalDao().delete(animal);
+
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(getContext(), "Animal removido do aplicativo!", Toast.LENGTH_SHORT).show();
+                            NavHostFragment.findNavController(this).popBackStack();
+                        });
+                    }).start();
+
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
+    }
+
+
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        return stream.toByteArray();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cadastro_animal, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

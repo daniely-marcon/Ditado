@@ -18,6 +18,14 @@
         <item>Grande</item>
     </string-array>
 
+    <string-array name="filo">
+        <item>Peixes</item>
+        <item>Aves</item>
+        <item>Repteis</item>
+        <item>Anfíbios</item>
+        <item>Mamiferos</item>
+    </string-array>
+
     <string name="titulo">Ditado</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

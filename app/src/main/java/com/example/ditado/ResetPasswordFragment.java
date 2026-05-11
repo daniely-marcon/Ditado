@@ -59,7 +59,7 @@ public class ResetPasswordFragment extends Fragment {
 
                         if (usuario != null) {
                             usuario.setSenha(novaSenha);
-                            db.usuarioDao().update(usuario, novaSenha);
+                            db.usuarioDao().update(usuario);
 
                             // Volta para a Main Thread para mostrar o Toast e navegar
                             requireActivity().runOnUiThread(() -> {

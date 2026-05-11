@@ -24,13 +24,12 @@ public interface UsuarioDao {
     @Query("SELECT * FROM Usuario WHERE email= :email")
     Usuario buscarUsuario(String email);
 
+
     @Insert
     void insert(Usuario usuario);
 
     @Update
     void update(Usuario usuario);
-
-    void update(Usuario usuario, String novaSenha);
 
     @Delete
     void delete(Usuario usuario);

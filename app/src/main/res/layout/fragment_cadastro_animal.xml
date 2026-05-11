@@ -10,16 +10,16 @@
     <!-- Titulo -->
     <TextView
         android:id="@+id/txtCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_width="405dp"
+        android:layout_height="45dp"
         android:layout_marginTop="72dp"
-        android:text="Cadastrar Animal"
-        android:textColor="@color/destaque"
         android:background="@color/white"
-        android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Cadastrar Animal"
+        android:textAlignment="center"
+        android:textColor="@color/destaque"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="3dp" />
 
     <!-- Nome animal -->
     <TextView
@@ -30,6 +30,7 @@
         android:layout_marginTop="48dp"
         android:text="Nome Animal"
         android:textColor="@color/destaque"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCadastro" />
 
@@ -37,10 +38,13 @@
         android:id="@+id/edtNomeAnimal"
         android:layout_width="272dp"
         android:layout_height="40dp"
+        android:layout_marginStart="49dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="90dp"
         android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeAnimal" />
 
@@ -53,65 +57,84 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="328dp"
-        android:text="Filo:"
+        android:text="Filo"
         android:textColor="@color/destaque"
-        app:layout_constraintBottom_toTopOf="@+id/edtFiloAnimal"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtNomeAnimal" />
 
-    <EditText
-        android:id="@+id/edtFiloAnimal"
-        android:layout_width="272dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFiloAnimal" />
-
     <!-- Selecionar Imagem  -->
-
-    <ImageView
-        android:id="@+id/imgFoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtFiloAnimal"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <!-- Confirmar cadastro do animal  -->
 
     <!-- B2 Voltar pagina -->
 
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="202dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinFilo"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
     <Button
         android:id="@+id/btnCadastrarAnimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="36dp"
         android:backgroundTint="@color/destaque"
         android:text="Cadastrar"
-        app:layout_constraintStart_toEndOf="@+id/btnVoltar_CODE"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
     <Button
         android:id="@+id/btnVoltar_CODE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="72dp"
         android:backgroundTint="@color/destaque"
         android:text="Voltar"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
+    <Spinner
+        android:id="@+id/spinFilo"
+        android:layout_width="267dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="90dp"
+        android:backgroundTint="@color/white"
+        android:foregroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFiloAnimal"
+        android:popupBackground="@color/white"/>
+
+    <Button
+        android:id="@+id/btnExcluir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/destaque"
+        android:text="Excluir"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/btnCadastrarAnimal"
+        app:layout_constraintStart_toEndOf="@+id/btnVoltar_CODE"
+        app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
