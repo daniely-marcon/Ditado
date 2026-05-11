@@ -3,23 +3,18 @@ package com.example.ditado;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import java.io.File;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -28,36 +23,28 @@ import com.example.ditado.databinding.FragmentCadastroBinding;
 import com.example.ditado.entities.Usuario;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-
 
 public class CadastroFragment extends Fragment {
 
     private FragmentCadastroBinding binding;
     private Bitmap fotoBitmap;
     private AppDatabase db;
-
     private Uri cameraUri;
-
-
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = FragmentCadastroBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        binding.imgFoto.setOnClickListener(v -> abrirCamera());
 
         binding.btnCadastrarUser.setOnClickListener(v -> {
             String nome = binding.edtNomeUser.getText().toString().trim();
@@ -65,21 +52,13 @@ public class CadastroFragment extends Fragment {
             String senha = binding.edtSenhaUser.getText().toString().trim();
             String tipo = binding.radioProfessor.isChecked() ? "Professor" : "Aluno";
 
-        binding.imgFoto.setImageBitmap(fotoBitmap);
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                    abrirCamera();
-                } else {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
-                }
-
-
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || fotoBitmap == null) {
-                Toast.makeText(getContext(), "Preencha todos os campos !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Preencha todos os campos e tire uma foto!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             new Thread(() -> {
-                try{
+                try {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     fotoBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream);
                     byte[] fotoBytes = stream.toByteArray();
@@ -92,12 +71,11 @@ public class CadastroFragment extends Fragment {
                         Toast.makeText(getContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                         NavHostFragment.findNavController(this).navigateUp();
                     });
-                }catch (Exception e) {
+                } catch (Exception e) {
                     requireActivity().runOnUiThread(() ->
                             Toast.makeText(getContext(), "Erro ao cadastrar usuário!", Toast.LENGTH_SHORT).show()
-                );
+                    );
                 }
-
             }).start();
         });
 
@@ -109,19 +87,17 @@ public class CadastroFragment extends Fragment {
     private void carregarImagem(Uri uri) {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                // Este é o 'Source' que você perguntou: ele prepara a URI para virar Bitmap
                 ImageDecoder.Source source = ImageDecoder.createSource(requireContext().getContentResolver(), uri);
                 fotoBitmap = ImageDecoder.decodeBitmap(source);
             } else {
-                // Este é o jeito do código que você enviou (para celulares antigos)
                 fotoBitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uri);
             }
             binding.imgFoto.setImageBitmap(fotoBitmap);
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "Erro ao carregar imagem", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private final ActivityResultLauncher<Uri> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.TakePicture(),
@@ -132,14 +108,15 @@ public class CadastroFragment extends Fragment {
             }
     );
 
-
-
-
     private void abrirCamera() {
-        File imageFile = new File(requireContext().getFilesDir(), "foto_usuario.jpg");
-        cameraUri = FileProvider.getUriForFile(requireContext(),
-                "com.example.ditado.fileprovider", imageFile);
-        cameraLauncher.launch(cameraUri);
+        try {
+            File imageFile = new File(requireContext().getFilesDir(), "foto_usuario.jpg");
+            cameraUri = FileProvider.getUriForFile(requireContext(),
+                    "com.example.ditado.fileprovider", imageFile);
+            cameraLauncher.launch(cameraUri);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Erro ao abrir a câmera", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

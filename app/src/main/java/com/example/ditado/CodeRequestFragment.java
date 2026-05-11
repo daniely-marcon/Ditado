@@ -79,7 +79,7 @@ public class CodeRequestFragment extends Fragment {
     // Metodo para enviar email
     public void sendEmailSingleRecipient(String recipient, String subject, String htmlBody) {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        emailIntent.setData(Uri.parse("mailfrom:")); // only email apps should handle this
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient}); // Single recipient
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
 
