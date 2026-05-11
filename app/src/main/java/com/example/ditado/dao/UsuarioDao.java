@@ -29,9 +29,6 @@ public interface UsuarioDao {
 
     @Update
     void update(Usuario usuario);
-
-    void update(Usuario usuario, String novaSenha);
-
     @Delete
     void delete(Usuario usuario);
 

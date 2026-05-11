@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.media3.exoplayer)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
 
     implementation(libs.appcompat)
