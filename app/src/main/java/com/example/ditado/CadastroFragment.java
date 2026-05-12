@@ -34,8 +34,7 @@ public class CadastroFragment extends Fragment {
     private Uri cameraUri;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCadastroBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -59,11 +58,29 @@ public class CadastroFragment extends Fragment {
 
             new Thread(() -> {
                 try {
+                    db = AppDatabase.getDatabase(requireContext());
+
+
+                    Usuario usuarioExistente = db.usuarioDao().buscarUsuario(email);
+
+                    if (usuarioExistente != null) {
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(getContext(), "Este e-mail já está cadastrado! Por favor, utilize outro.", Toast.LENGTH_LONG).show();
+
+                            binding.edtEmailUser.setText("");
+                            binding.edtEmailUser.requestFocus();
+                        });
+                        return; // O return para a execução e impede o cadastro!
+                    }
+
+                    Bitmap fotoRedimensionada = redimensionarBitmap(fotoBitmap, 500);
+
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    fotoBitmap.compress(Bitmap.CompressFormat.PNG, 80, stream);
+
+                    fotoRedimensionada.compress(Bitmap.CompressFormat.JPEG, 70, stream);
                     byte[] fotoBytes = stream.toByteArray();
 
-                    db = AppDatabase.getDatabase(requireContext());
+
                     Usuario novoUser = new Usuario(nome, email, senha, fotoBytes, tipo);
                     db.usuarioDao().insert(novoUser);
 
@@ -71,6 +88,7 @@ public class CadastroFragment extends Fragment {
                         Toast.makeText(getContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                         NavHostFragment.findNavController(this).navigateUp();
                     });
+
                 } catch (Exception e) {
                     requireActivity().runOnUiThread(() ->
                             Toast.makeText(getContext(), "Erro ao cadastrar usuário!", Toast.LENGTH_SHORT).show()
@@ -82,6 +100,22 @@ public class CadastroFragment extends Fragment {
         binding.btnVoltar.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigateUp();
         });
+    }
+
+
+    private Bitmap redimensionarBitmap(Bitmap imagem, int tamanhoMaximo) {
+        int largura = imagem.getWidth();
+        int altura = imagem.getHeight();
+
+        float proporcaoBitmap = (float) largura / (float) altura;
+        if (proporcaoBitmap > 1) {
+            largura = tamanhoMaximo;
+            altura = (int) (largura / proporcaoBitmap);
+        } else {
+            altura = tamanhoMaximo;
+            largura = (int) (altura * proporcaoBitmap);
+        }
+        return Bitmap.createScaledBitmap(imagem, largura, altura, true);
     }
 
     private void carregarImagem(Uri uri) {

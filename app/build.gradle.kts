@@ -39,6 +39,16 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += listOf(
+                "META-INF/NOTICE.md",
+                "META-INF/LICENSE.md",
+                "META-INF/NOTICE.txt",
+                "META-INF/LICENSE.txt"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -60,5 +70,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.room:room-common:2.6.1")
 
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 
 }

@@ -19,7 +19,8 @@ public class ResetPasswordFragment extends Fragment {
 
     private FragmentResetPasswordBinding binding;
     private CountDownTimer timer;
-    private String codigo; // Codigo enviado para o email do usuário
+    private String codigo;
+    private String emailRecebido; // <-- Variável global para guardar o e-mail
     private AppDatabase db;
 
     @Override
@@ -32,9 +33,10 @@ public class ResetPasswordFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Recupera o código e email enviados pela tela anterior
+        // Recupera o código E O EMAIL enviados pela tela anterior logo de cara
         if (getArguments() != null) {
             codigo = getArguments().getString("codigoEnviado");
+            emailRecebido = getArguments().getString("email");
         }
 
         binding.btnConfirmar.setOnClickListener(v -> {
@@ -47,39 +49,45 @@ public class ResetPasswordFragment extends Fragment {
                 return;
             }
 
-            if (codigoDigitado.equals(codigo)) {
-                if (novaSenha.equals(confirmarSenha)) {
-
-
-                    new Thread(() -> {
-                        String email = getArguments().getString("email");
-                        db = AppDatabase.getDatabase(requireContext());
-
-                        Usuario usuario = db.usuarioDao().buscarUsuario(email);
-
-                        if (usuario != null) {
-                            usuario.setSenha(novaSenha);
-                            db.usuarioDao().update(usuario);
-
-                            // Volta para a Main Thread para mostrar o Toast e navegar
-                            requireActivity().runOnUiThread(() -> {
-                                Toast.makeText(getContext(), "Senha atualizada com sucesso!", Toast.LENGTH_SHORT).show();
-                                NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_LoginFragment);
-                            });
-                        }
-                    }).start();
-
-                } else {
-                    Toast.makeText(getContext(), "As senhas não coincidem!", Toast.LENGTH_SHORT).show();
-                }
-
-            } else {
-                Toast.makeText(getContext(), "Código de verificação incorreto!", Toast.LENGTH_SHORT).show();
-                NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_CodeRequestFragment);
+            // Trava de segurança
+            if (emailRecebido == null || emailRecebido.isEmpty()) {
+                Toast.makeText(getContext(), "Erro Crítico: E-mail não recebido da tela anterior!", Toast.LENGTH_LONG).show();
+                return;
             }
 
+            if (!codigoDigitado.equals(codigo)) {
+                Toast.makeText(getContext(), "Código de verificação incorreto!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            if (!novaSenha.equals(confirmarSenha)) {
+                Toast.makeText(getContext(), "As senhas não coincidem!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // SE CHEGOU AQUI, TUDO ESTÁ PREENCHIDO CORRETAMENTE. VAMOS AO BANCO:
+            new Thread(() -> {
+                try {
+                    db = AppDatabase.getDatabase(requireContext());
+
+                    // Comandamos o banco a mudar a senha diretamente onde o e-mail for igual
+                    db.usuarioDao().atualizarSenhaPorEmail(emailRecebido, novaSenha);
+
+                    // Se chegou aqui, o SQL rodou.
+                    requireActivity().runOnUiThread(() -> {
+                        Toast.makeText(getContext(), "Senha atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+                        NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_LoginFragment);
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    requireActivity().runOnUiThread(() -> {
+                        Toast.makeText(getContext(), "Erro técnico: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+                }
+            }).start();
         });
+
         binding.btnVoltarR.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_ResetPasswordFragment_to_CodeRequestFragment);
         });

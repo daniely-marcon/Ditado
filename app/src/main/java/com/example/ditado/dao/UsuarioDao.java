@@ -24,6 +24,8 @@ public interface UsuarioDao {
     @Query("SELECT * FROM Usuario WHERE email= :email")
     Usuario buscarUsuario(String email);
 
+    @Query("UPDATE Usuario SET senha = :novaSenha WHERE email = :email")
+    void atualizarSenhaPorEmail(String email, String novaSenha);
 
     @Insert
     void insert(Usuario usuario);

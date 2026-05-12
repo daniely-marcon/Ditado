@@ -33,10 +33,6 @@ public class LoginFragment extends Fragment {
 
         db = AppDatabase.getDatabase(requireContext());
 
-
-        criarUsuarioPadrao();
-
-
         binding.btnEntrar.setOnClickListener(v -> {
             String email = binding.edtEmail.getText().toString().trim();
             String senha = binding.edtSenha.getText().toString().trim();
@@ -54,22 +50,9 @@ public class LoginFragment extends Fragment {
                         .navigate(R.id.action_LoginFragment_to_CadastroFragment));
 
         binding.txtResetPass.setOnClickListener(v ->
-                        NavHostFragment.findNavController(LoginFragment.this)
-                                .navigate(R.id.action_LoginFragment_to_CodeRequestFragment));
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_LoginFragment_to_CodeRequestFragment));
 
-    }
-
-    private void criarUsuarioPadrao() {
-        new Thread(() -> {
-
-            Usuario userTeste = db.usuarioDao().buscarUsuario("daniellymaximo13@gmail.com");
-
-
-            if (userTeste == null) {
-                Usuario novoUser = new Usuario("Teste","daniellymaximo13@gmail.com","123",null,"Professor");
-                db.usuarioDao().insert(novoUser);
-            }
-        }).start();
     }
 
     private void fazerLogin(String email, String senha) {
@@ -82,8 +65,6 @@ public class LoginFragment extends Fragment {
                     SharedPreferences.Editor editor = pref.edit();
 
                     editor.putInt("id_usuario", usuario.getId_usuario());
-
-
                     editor.putString("tipo_usuario", usuario.getTipo());
 
                     editor.apply();
