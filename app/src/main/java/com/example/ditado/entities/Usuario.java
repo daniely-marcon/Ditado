@@ -45,6 +45,10 @@ public class Usuario {
         return this.imagem_usuario;
     }
 
+    public void setImagem_usuario(byte[] imagem_usuario) {
+        this.imagem_usuario = imagem_usuario;
+    }
+
     public String getNome_usuario() {
         return nome_usuario;
     }
@@ -53,9 +57,18 @@ public class Usuario {
         return tipo;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo=tipo;
+    }
+
     public void setEmail(String email) {
         this.email=email;
     }
 
+    public void setNome_usuario(String nome_usuario) {
+        this.nome_usuario=nome_usuario;
+    }
+
     public void setSenha(String number) { this.senha=senha; }
+
 }

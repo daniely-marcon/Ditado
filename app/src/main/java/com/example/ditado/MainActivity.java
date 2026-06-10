@@ -46,7 +46,13 @@ public class MainActivity extends AppCompatActivity {
         db = AppDatabase.getDatabase(this);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.FirstFragment,
+                R.id.LoginFragment
+        ).build();
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
@@ -78,21 +84,20 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     txtNomeTela.setText("");
                 }
+
             }
         });
     }
 
-    private void carregarDadosDoUsuarioToolbar() {
+    public void carregarDadosDoUsuarioToolbar() {
         SharedPreferences pref = getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
         int idUsuario = pref.getInt("id_usuario", -1);
 
         if (idUsuario != -1) {
             new Thread(() -> {
-
                 Usuario usuarioLogado = db.usuarioDao().getUsuarioById(idUsuario);
 
                 if (usuarioLogado != null) {
-
                     runOnUiThread(() -> {
                         TextView txtNome = findViewById(R.id.txtNomeUsuarioToolbar);
                         ImageView imgFoto = findViewById(R.id.imgFotoUsuarioToolbar);
@@ -100,13 +105,30 @@ public class MainActivity extends AppCompatActivity {
                         txtNome.setText(usuarioLogado.getNome_usuario());
 
                         byte[] fotoBytes = usuarioLogado.getImagem_usuario();
-
                         if (fotoBytes != null && fotoBytes.length > 0) {
                             Bitmap bitmap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
                             imgFoto.setImageBitmap(bitmap);
                         } else {
                             imgFoto.setImageResource(R.drawable.ic_launcher_background);
                         }
+
+                        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+                        View.OnClickListener abrirPerfilListener = v -> {
+                            if (navController.getCurrentDestination() != null &&
+                                    navController.getCurrentDestination().getId() != R.id.CadastroFragment) {
+
+                                Bundle args = new Bundle();
+                                args.putInt("id_usuario_edicao", idUsuario); // Passa o ID atual
+
+                                navController.navigate(R.id.CadastroFragment, args);
+                            }
+                        };
+
+                        txtNome.setOnClickListener(abrirPerfilListener);
+                        imgFoto.setOnClickListener(abrirPerfilListener);
+
+
                     });
                 }
             }).start();

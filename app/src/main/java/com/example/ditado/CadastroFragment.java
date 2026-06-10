@@ -1,6 +1,10 @@
 package com.example.ditado;
+import static android.view.View.GONE;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
@@ -33,6 +37,11 @@ public class CadastroFragment extends Fragment {
     private AppDatabase db;
     private Uri cameraUri;
 
+
+    private int idUsuarioLogado = -1;
+    private Usuario usuarioLogado;
+    private boolean isModoEdicao = false;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCadastroBinding.inflate(inflater, container, false);
@@ -43,7 +52,36 @@ public class CadastroFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        db = AppDatabase.getDatabase(requireContext());
+
+        if (getArguments() != null) {
+            idUsuarioLogado = getArguments().getInt("id_usuario_edicao", -1);
+        }
+
+        if (idUsuarioLogado != -1) {
+            isModoEdicao = true;
+            configurarLayoutEdicao();
+            carregarDadosDoUsuario();
+        }
+
+        if (idUsuarioLogado != -1) {
+            isModoEdicao = true;
+            configurarLayoutEdicao();
+            carregarDadosDoUsuario();
+        }
+
         binding.imgFoto.setOnClickListener(v -> abrirCamera());
+
+
+        binding.edtEmailUser.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                String email = binding.edtEmailUser.getText().toString().trim();
+                if (!email.isEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    binding.edtEmailUser.setError("Formato de e-mail inválido");
+                }
+            }
+        });
+
 
         binding.btnCadastrarUser.setOnClickListener(v -> {
             String nome = binding.edtNomeUser.getText().toString().trim();
@@ -51,57 +89,106 @@ public class CadastroFragment extends Fragment {
             String senha = binding.edtSenhaUser.getText().toString().trim();
             String tipo = binding.radioProfessor.isChecked() ? "Professor" : "Aluno";
 
-            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || fotoBitmap == null) {
-                Toast.makeText(getContext(), "Preencha todos os campos e tire uma foto!", Toast.LENGTH_SHORT).show();
+
+            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || (!isModoEdicao && fotoBitmap == null)) {
+                Toast.makeText(getContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            new Thread(() -> {
-                try {
-                    db = AppDatabase.getDatabase(requireContext());
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.edtEmailUser.setError("Digite um e-mail válido!");
+                binding.edtEmailUser.requestFocus();
+                return;
+            }
+
+            if (!isSenhaForte(senha)) {
+                binding.edtSenhaUser.setError("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais (@#$%^&+=!).");
+                binding.edtSenhaUser.requestFocus();
+                return;
+            }
 
 
-                    Usuario usuarioExistente = db.usuarioDao().buscarUsuario(email);
-
-                    if (usuarioExistente != null) {
-                        requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(getContext(), "Este e-mail já está cadastrado! Por favor, utilize outro.", Toast.LENGTH_LONG).show();
-
-                            binding.edtEmailUser.setText("");
-                            binding.edtEmailUser.requestFocus();
-                        });
-                        return; // O return para a execução e impede o cadastro!
-                    }
-
-                    Bitmap fotoRedimensionada = redimensionarBitmap(fotoBitmap, 500);
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-                    fotoRedimensionada.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-                    byte[] fotoBytes = stream.toByteArray();
+            byte[] fotoBytes = null;
+            if (fotoBitmap != null) {
+                Bitmap fotoRedimensionada = redimensionarBitmap(fotoBitmap, 500);
+                java.io.ByteArrayOutputStream stream = new java.io.ByteArrayOutputStream();
+                fotoRedimensionada.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                fotoBytes = stream.toByteArray();
+            } else if (isModoEdicao && usuarioLogado != null) {
+                fotoBytes = usuarioLogado.getImagem_usuario();
+            }
 
 
-                    Usuario novoUser = new Usuario(nome, email, senha, fotoBytes, tipo);
-                    db.usuarioDao().insert(novoUser);
+            UserManager userManager = new UserManager(requireContext());
+
+            if (isModoEdicao) {
+
+                userManager.updateUser(idUsuarioLogado, nome, email, senha, tipo, fotoBytes, () -> {
+
 
                     requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(getContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                        NavHostFragment.findNavController(this).navigateUp();
-                    });
+                        Toast.makeText(getContext(), "Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
 
-                } catch (Exception e) {
-                    requireActivity().runOnUiThread(() ->
-                            Toast.makeText(getContext(), "Erro ao cadastrar usuário!", Toast.LENGTH_SHORT).show()
-                    );
-                }
-            }).start();
+
+                        if (getActivity() instanceof MainActivity) {
+                            ((MainActivity) getActivity()).carregarDadosDoUsuarioToolbar();
+                        }
+
+                        //
+                        NavHostFragment.findNavController(CadastroFragment.this)
+                                .navigate(R.id.action_CadastroFragment_to_FirstFragment);
+                    });
+                });
+
+            } else {
+                // O bloco do cadastro normal (registerUser) continua igual aqui embaixo...
+                userManager.registerUser(nome, email, senha, tipo, fotoBytes);
+                Toast.makeText(getContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(this).navigateUp();
+            }
         });
 
         binding.btnVoltar.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigateUp();
         });
     }
+    private boolean isSenhaForte(String senha) {
 
+        String regexSenha = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+        return senha.matches(regexSenha);
+    }
+    private void configurarLayoutEdicao() {
+        binding.txtCadastro.setText("Alterar Dados");
+        binding.btnCadastrarUser.setText("Salvar");
+    }
+
+    private void carregarDadosDoUsuario() {
+        new Thread(() -> {
+            usuarioLogado = db.usuarioDao().getUsuarioById(idUsuarioLogado);
+
+            if (usuarioLogado != null) {
+                requireActivity().runOnUiThread(() -> {
+                    binding.edtNomeUser.setText(usuarioLogado.getNome_usuario());
+                    binding.edtEmailUser.setText(usuarioLogado.getEmail());
+
+                    binding.txtTIPOuser.setVisibility(GONE);
+                    binding.radioAluno.setVisibility(GONE);
+                    binding.radioProfessor.setVisibility(GONE);
+                    if ("Professor".equals(usuarioLogado.getTipo())) {
+                        binding.radioProfessor.setChecked(true);
+                    } else {
+                        binding.radioAluno.setChecked(true);
+                    }
+
+                    byte[] fotoBytes = usuarioLogado.getImagem_usuario();
+                    if (fotoBytes != null && fotoBytes.length > 0) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
+                        binding.imgFoto.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        }).start();
+    }
 
     private Bitmap redimensionarBitmap(Bitmap imagem, int tamanhoMaximo) {
         int largura = imagem.getWidth();
@@ -155,6 +242,9 @@ public class CadastroFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+        pref.edit().remove("id_usuario").apply();
+
         super.onDestroyView();
         binding = null;
     }

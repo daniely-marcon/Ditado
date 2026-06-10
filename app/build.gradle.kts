@@ -59,7 +59,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.media3.exoplayer)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
-
+    implementation("org.mindrot:jbcrypt:0.4")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -69,6 +69,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.room:room-common:2.6.1")
+    implementation("org.springframework.security:spring-security-crypto:5.8.0")
 
     implementation("com.sun.mail:android-mail:1.6.7")
     implementation("com.sun.mail:android-activation:1.6.7")

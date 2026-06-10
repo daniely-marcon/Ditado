@@ -12,14 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.ditado.database.AppDatabase;
 import com.example.ditado.databinding.FragmentLoginBinding;
 import com.example.ditado.entities.Usuario;
+import com.example.ditado.security.SecurityUtils; // Importa a classe de segurança da sua professora
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    private AppDatabase db;
+    private UserManager userManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +31,8 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        db = AppDatabase.getDatabase(requireContext());
+
+        userManager = new UserManager(requireContext());
 
         binding.btnEntrar.setOnClickListener(v -> {
             String email = binding.edtEmail.getText().toString().trim();
@@ -52,32 +53,46 @@ public class LoginFragment extends Fragment {
         binding.txtResetPass.setOnClickListener(v ->
                 NavHostFragment.findNavController(LoginFragment.this)
                         .navigate(R.id.action_LoginFragment_to_CodeRequestFragment));
-
     }
 
-    private void fazerLogin(String email, String senha) {
-        new Thread(() -> {
-            Usuario usuario = db.usuarioDao().buscarUsuario(email, senha);
+    private void fazerLogin(String email, String senhaDigitada) {
+
+        userManager.buscarUsuarioPorEmail(email, usuario -> {
+
 
             requireActivity().runOnUiThread(() -> {
+
+
                 if (usuario != null) {
-                    SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
 
-                    editor.putInt("id_usuario", usuario.getId_usuario());
-                    editor.putString("tipo_usuario", usuario.getTipo());
 
-                    editor.apply();
+                    boolean senhaValida = SecurityUtils.verifyPassword(senhaDigitada, usuario.getSenha());
 
-                    Toast.makeText(getContext(), "Bem-vindo!", Toast.LENGTH_SHORT).show();
+                    if (senhaValida) {
 
-                    NavHostFragment.findNavController(this)
-                            .navigate(R.id.action_LoginFragment_to_FirstFragment);
+                        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+
+                        editor.putInt("id_usuario", usuario.getId_usuario());
+                        editor.putString("tipo_usuario", usuario.getTipo());
+                        editor.apply();
+
+                        Toast.makeText(getContext(), "Bem-vindo!", Toast.LENGTH_SHORT).show();
+
+
+                        NavHostFragment.findNavController(this)
+                                .navigate(R.id.action_LoginFragment_to_FirstFragment);
+                    } else {
+
+                        Toast.makeText(getContext(), "E-mail ou senha incorretos!", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
+
                     Toast.makeText(getContext(), "E-mail ou senha incorretos!", Toast.LENGTH_SHORT).show();
                 }
             });
-        }).start();
+        });
     }
 
     @Override

@@ -16,6 +16,8 @@
         <action
             android:id="@+id/action_LoginFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"
+            app:popUpTo="@id/LoginFragment"
+            app:popUpToInclusive="true"
             />
         <action
             android:id="@+id/action_LoginFragment_to_CadastroFragment"
@@ -37,6 +39,11 @@
             android:id="@+id/action_CadastroFragment_to_LoginFragment"
             app:destination="@id/LoginFragment"
             />
+        <action
+            android:id="@+id/action_CadastroFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            />
+
     </fragment>
 
 
@@ -77,6 +84,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_CadastroAnimalFragment"
             app:destination="@id/CadastroAnimalFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_CadastroFragment"
+            app:destination="@id/CadastroFragment" />
     </fragment>
 
 
