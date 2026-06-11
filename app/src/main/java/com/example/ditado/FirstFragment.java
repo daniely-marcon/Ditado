@@ -149,7 +149,7 @@ public class FirstFragment extends Fragment {
             list.setVisibility(View.GONE);
             return;
         }
-        list.setAdapter(new AdaptadorListView(getContext(),todos));
+        list.setAdapter(new AdaptadorListView(getContext(), todos, false));
         binding.lvAnimais.setOnItemClickListener((parent, v, position, id) -> {
             irParaJogo(todos, position);
         });

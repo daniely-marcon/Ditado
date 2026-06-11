@@ -19,8 +19,13 @@ import java.util.List;
 
 public class AdaptadorListView extends ArrayAdapter<Animal> {
 
-    public AdaptadorListView(Context context, List<Animal> listaAnimais) {
+
+    private final boolean exibirNome;
+
+
+    public AdaptadorListView(Context context, List<Animal> listaAnimais, boolean exibirNome) {
         super(context, R.layout.item_lista_animal, listaAnimais);
+        this.exibirNome = exibirNome;
     }
 
     @NonNull
@@ -39,7 +44,17 @@ public class AdaptadorListView extends ArrayAdapter<Animal> {
 
         if (animalAtual != null) {
 
+
             filo.setText(animalAtual.getFilo_animal());
+            filo.setVisibility(View.VISIBLE);
+
+
+            if (exibirNome) {
+                nome.setText(animalAtual.getNome_animal());
+                nome.setVisibility(View.VISIBLE);
+            } else {
+                nome.setVisibility(View.GONE);
+            }
 
 
             byte[] imagemBytes = animalAtual.getImagem_animal();
