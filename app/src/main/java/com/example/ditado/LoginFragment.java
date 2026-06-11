@@ -11,10 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
+import com.example.ditado.dao.UsuarioDao;
 import com.example.ditado.databinding.FragmentLoginBinding;
 import com.example.ditado.entities.Usuario;
 import com.example.ditado.security.SecurityUtils; // Importa a classe de segurança da sua professora
+
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginFragment extends Fragment {
 
@@ -65,7 +67,6 @@ public class LoginFragment extends Fragment {
 
                 if (usuario != null) {
 
-
                     boolean senhaValida = SecurityUtils.verifyPassword(senhaDigitada, usuario.getSenha());
 
                     if (senhaValida) {
@@ -94,6 +95,7 @@ public class LoginFragment extends Fragment {
             });
         });
     }
+
 
     @Override
     public void onDestroyView() {

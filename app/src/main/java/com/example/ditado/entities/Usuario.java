@@ -3,6 +3,7 @@ package com.example.ditado.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+
 @Entity
 public class Usuario {
     @PrimaryKey(autoGenerate = true)
@@ -69,6 +70,6 @@ public class Usuario {
         this.nome_usuario=nome_usuario;
     }
 
-    public void setSenha(String number) { this.senha=senha; }
+    public void setSenha(String number) { this.senha=number; }
 
 }

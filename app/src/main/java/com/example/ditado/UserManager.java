@@ -1,6 +1,9 @@
 package com.example.ditado;
 
 import android.content.Context;
+
+import androidx.navigation.NavAction;
+
 import com.example.ditado.database.AppDatabase;
 import com.example.ditado.entities.Usuario;
 import com.example.ditado.security.SecurityUtils;
@@ -29,22 +32,22 @@ public class UserManager {
         }).start();
     }
 
-    public void updateUser(int idUsuario, String newNome, String newEmail, String newPassword, String newTipo, byte[] newFoto, OnUpdateCallback callback) {
+
+    public void updateUser(int idUsuario, String newNome, String newEmail, String newTipo, byte[] newFoto, OnUpdateCallback callback) {
         new Thread(() -> {
             Usuario usuario = usuarioDao.getUsuarioById(idUsuario);
             if (usuario == null) {
                 usuario = usuarioDao.buscarUsuario(newEmail);
+
             }
 
             if (usuario != null) {
+
                 if (!newNome.isEmpty()) usuario.setNome_usuario(newNome);
                 if (!newEmail.isEmpty()) usuario.setEmail(newEmail);
                 if (!newTipo.isEmpty()) usuario.setTipo(newTipo);
                 if (newFoto != null) usuario.setImagem_usuario(newFoto);
 
-                if (!newPassword.isEmpty()) {
-                    usuario.setSenha(SecurityUtils.hashPassword(newPassword));
-                }
 
                 usuarioDao.update(usuario);
 

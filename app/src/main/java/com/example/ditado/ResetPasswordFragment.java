@@ -73,8 +73,8 @@ public class ResetPasswordFragment extends Fragment {
             }
 
 
-            userManager.redefinirSenhaPorEmail(emailRecebido, novaSenha, (sucesso, erroMensagem) -> {
 
+            userManager.redefinirSenhaPorEmail(emailRecebido, novaSenha, (sucesso, erroMensagem) -> {
 
                 requireActivity().runOnUiThread(() -> {
                     if (sucesso) {

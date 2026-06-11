@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.media3.exoplayer)
+    implementation(libs.runtime)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("org.mindrot:jbcrypt:0.4")
     implementation(libs.appcompat)

@@ -43,6 +43,10 @@
             android:id="@+id/action_CadastroFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"
             />
+        <action
+            android:id="@+id/action_CadastroFragment_to_CodeRequestFragment"
+            app:destination="@id/CodeRequestFragment"
+            />
 
     </fragment>
 
@@ -142,6 +146,9 @@
         <action
             android:id="@+id/action_CodeRequestFragment_to_ResetPasswordFragment"
             app:destination="@id/ResetPasswordFragment"/>
+        <action
+            android:id="@+id/action_CodeRequestFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"/>
     </fragment>
 
 

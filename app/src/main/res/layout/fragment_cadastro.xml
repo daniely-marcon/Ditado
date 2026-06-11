@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/edtEmailUser"
-        android:inputType="textEmailAddress"
         android:layout_width="272dp"
         android:layout_height="40dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/txtSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <ImageView
         android:id="@+id/imgFoto"
@@ -48,11 +46,11 @@
 
     <EditText
         android:id="@+id/edtNomeUser"
-        android:inputType="text"
         android:layout_width="272dp"
         android:layout_height="40dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/txtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.352"
@@ -110,11 +108,11 @@
 
     <EditText
         android:id="@+id/edtSenhaUser"
-        android:inputType="text"
         android:layout_width="272dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="12dp"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
 
@@ -145,8 +143,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTIPOuser"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="431dp"
-       >
+        tools:layout_editor_absoluteY="431dp">
 
         <RadioButton
             android:id="@+id/radioProfessor"
@@ -182,6 +179,21 @@
         app:layout_constraintEnd_toStartOf="@+id/btnCadastrarUser"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
+
+    <Button
+        android:id="@+id/btnSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:backgroundTint="@color/destaque"
+        android:text="Recuperar Senha"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailUser"
+
+        app:layout_constraintVertical_bias="0.055" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

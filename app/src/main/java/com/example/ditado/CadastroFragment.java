@@ -26,9 +26,16 @@ import com.example.ditado.database.AppDatabase;
 import com.example.ditado.databinding.FragmentCadastroBinding;
 import com.example.ditado.entities.Usuario;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 public class CadastroFragment extends Fragment {
 
@@ -63,7 +70,7 @@ public class CadastroFragment extends Fragment {
             configurarLayoutEdicao();
             carregarDadosDoUsuario();
         }
-
+// Essa condição  está repetida ?
         if (idUsuarioLogado != -1) {
             isModoEdicao = true;
             configurarLayoutEdicao();
@@ -123,7 +130,7 @@ public class CadastroFragment extends Fragment {
 
             if (isModoEdicao) {
 
-                userManager.updateUser(idUsuarioLogado, nome, email, senha, tipo, fotoBytes, () -> {
+                userManager.updateUser(idUsuarioLogado, nome, email, tipo, fotoBytes, () -> {
 
 
                     requireActivity().runOnUiThread(() -> {
@@ -137,8 +144,8 @@ public class CadastroFragment extends Fragment {
                         //
                         NavHostFragment.findNavController(CadastroFragment.this)
                                 .navigate(R.id.action_CadastroFragment_to_FirstFragment);
-                    });
                 });
+               });
 
             } else {
                 // O bloco do cadastro normal (registerUser) continua igual aqui embaixo...
@@ -149,18 +156,39 @@ public class CadastroFragment extends Fragment {
         });
 
         binding.btnVoltar.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigateUp();
+            if(isModoEdicao){
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_CodeRequestFragment_to_FirstFragment);
+            }
+            else {
+                NavHostFragment.findNavController(this).navigateUp();
+            }
         });
+
+        binding.btnSenha.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            if (usuarioLogado != null) {
+                bundle.putString("email", usuarioLogado.getEmail());
+            }
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_CadastroFragment_to_CodeRequestFragment, bundle);
+        });
+
     }
     private boolean isSenhaForte(String senha) {
 
-        String regexSenha = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+        String regexSenha = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#*$%^&+=!])(?=\\S+$).{8,}$";
         return senha.matches(regexSenha);
     }
     private void configurarLayoutEdicao() {
         binding.txtCadastro.setText("Alterar Dados");
         binding.btnCadastrarUser.setText("Salvar");
+        binding.edtSenhaUser.setVisibility(View.INVISIBLE);
+        binding.txtSenha.setVisibility(View.INVISIBLE);
+        binding.btnSenha.setVisibility(View.VISIBLE);
     }
+
+
 
     private void carregarDadosDoUsuario() {
         new Thread(() -> {
