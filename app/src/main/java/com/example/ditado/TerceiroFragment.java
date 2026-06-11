@@ -60,6 +60,16 @@ public class TerceiroFragment extends Fragment {
 
 
             binding.btnLimpar.setOnClickListener(v -> limparHistoricoDoBanco());
+
+            binding.btnBuscar.setOnClickListener(v -> {
+                String termoBusca = binding.edtBuscar.getText().toString().trim();
+
+                if (termoBusca.isEmpty()) {
+                    carregarDadosDoBanco();
+                } else {
+                    buscarDadosDoBanco(termoBusca);
+                }
+            });
         }
     }
 
@@ -81,8 +91,37 @@ public class TerceiroFragment extends Fragment {
                     if (concluidosDb != null) {
                         listaConcluidos.addAll(concluidosDb);
                     }
-                    meuAdaptador = new AdaptadorListView(getContext(), listaConcluidos);
+                    meuAdaptador = new AdaptadorListView(getContext(), listaConcluidos, true);
                     binding.lvEstatisticas.setAdapter(meuAdaptador);
+                });
+            }).start();
+        }
+    }
+    private void buscarDadosDoBanco(String termo) {
+        SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+        int idUsuario = pref.getInt("id_usuario", -1);
+
+        if (idUsuario != -1) {
+            new Thread(() -> {
+                AppDatabase db = AppDatabase.getDatabase(requireContext());
+
+
+                List<Animal> filtradosDb = db.palavrasAprendidasDao().buscarPalavrasDoUsuario(idUsuario, termo);
+
+                requireActivity().runOnUiThread(() -> {
+                    listaConcluidos.clear();
+                    if (filtradosDb != null) {
+                        listaConcluidos.addAll(filtradosDb);
+                    }
+
+
+                    if (meuAdaptador != null) {
+                        meuAdaptador.notifyDataSetChanged();
+                    } else {
+
+                        meuAdaptador = new AdaptadorListView(getContext(), listaConcluidos, true);
+                        binding.lvEstatisticas.setAdapter(meuAdaptador);
+                    }
                 });
             }).start();
         }

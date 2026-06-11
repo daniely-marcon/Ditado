@@ -19,6 +19,9 @@ public interface PalavrasAprendidasDao {
 
     @Query("DELETE FROM PalavrasAprendidas WHERE id_usuario = :id_usuario")
     void ApagarPalavrasUsuario(int id_usuario);
+
+    @Query("SELECT A.* FROM Animal AS A INNER JOIN PalavrasAprendidas AS PA ON A.id_animal = PA.id_animal WHERE PA.id_usuario = :idUsuario AND A.nome_animal LIKE '%' || :termoBusca || '%'")
+    List<Animal> buscarPalavrasDoUsuario(int idUsuario, String termoBusca);
     @Insert
     void insert(PalavrasAprendidas palavrasAprendidas);
 
@@ -27,5 +30,7 @@ public interface PalavrasAprendidasDao {
 
     @Delete
     void delete(PalavrasAprendidas palavrasAprendidas);
+
+
 
 }

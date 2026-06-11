@@ -23,11 +23,10 @@
     <ListView
         android:id="@+id/lvEstatisticas"
         android:layout_width="409sp"
-        android:layout_height="588sp"
-        android:layout_marginTop="28sp"
-        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas"
-        tools:layout_editor_absoluteX="1dp" >
-    </ListView>
+        android:layout_height="558sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscar"
+        tools:layout_editor_absoluteX="0dp"></ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabF3"
@@ -53,5 +52,31 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lvEstatisticas" />
+
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="36dp"
+        android:backgroundTint="@color/destaque"
+        android:text="Buscar"
+        android:textColor="@color/white"
+        app:iconSize="30dp"
+        app:iconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas" />
+
+    <EditText
+        android:id="@+id/edtBuscar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Nome animal"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
