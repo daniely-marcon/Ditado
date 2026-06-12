@@ -44,22 +44,27 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (androidx.core.content.ContextCompat.checkSelfPermission(requireContext(),
+                    android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+
         if (getArguments() != null) {
             listaAnimais = (List<Animal>) getArguments().getSerializable("lista_animais");
             indiceAtual = getArguments().getInt("indice_atual");
         }
 
-
         configurarTTS();
-
 
         MainActivity main = (MainActivity) getActivity();
         if (main != null) {
             binding.txtResult.setTextSize(main.fonte);
-            binding.txtPalavra.setTextSize(main.fonte*2f-10f);
+            binding.txtPalavra.setTextSize(main.fonte * 2f - 10f);
             binding.btnTerminar.setTextSize(main.fonte);
         }
-
 
         if (listaAnimais != null && !listaAnimais.isEmpty()) {
             exibirAnimalAtual(false);
@@ -84,7 +89,6 @@ public class SecondFragment extends Fragment {
                 tts.setLanguage(new Locale("pt", "BR"));
                 ttsPronto = true;
 
-
                 if (listaAnimais != null && !listaAnimais.isEmpty()) {
                     falarPalavra(listaAnimais.get(indiceAtual).getNome_animal());
                 }
@@ -97,7 +101,6 @@ public class SecondFragment extends Fragment {
             tts.speak(texto, TextToSpeech.QUEUE_FLUSH, null, null);
         }
     }
-
 
     private void exibirAnimalAtual(boolean deveFalar) {
         if (listaAnimais != null && indiceAtual < listaAnimais.size()) {
@@ -124,9 +127,7 @@ public class SecondFragment extends Fragment {
 
         if (resposta.equalsIgnoreCase(atual.getNome_animal())) {
 
-
             salvarPalavraAprendida(atual);
-
 
             binding.txtResult.setText("Muito bem! Próximo...");
             binding.txtResult.setTextColor(Color.parseColor("#34A43A"));
@@ -138,8 +139,6 @@ public class SecondFragment extends Fragment {
                 if (indiceAtual >= listaAnimais.size()) indiceAtual = 0;
 
                 binding.edtPalavra.setText("");
-
-
                 exibirAnimalAtual(true);
             } else {
                 Toast.makeText(getContext(), "Parabéns! Você terminou o grupo!", Toast.LENGTH_LONG).show();
@@ -148,27 +147,80 @@ public class SecondFragment extends Fragment {
         } else {
             binding.txtResult.setText("Quase lá! Tente de novo.");
             binding.txtResult.setTextColor(Color.RED);
-                    }
+        }
     }
 
     private void salvarPalavraAprendida(Animal animalAcertado) {
-
         SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
         int idUsuario = pref.getInt("id_usuario", -1);
 
         if (idUsuario != -1) {
-
             PalavrasAprendidas novaConquista = new PalavrasAprendidas(idUsuario, animalAcertado.getId_animal());
-
             AppDatabase db = AppDatabase.getDatabase(requireContext());
 
             new Thread(() -> {
                 try {
                     db.palavrasAprendidasDao().insert(novaConquista);
+                    verificarConquistaDoFilo(idUsuario, animalAcertado.getFilo_animal());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }).start();
+        }
+    }
+
+    private void verificarConquistaDoFilo(int idUsuario, String filoDoAnimal) {
+        AppDatabase db = AppDatabase.getDatabase(requireContext());
+
+        int totalDoFilo = db.palavrasAprendidasDao().contarTotalAnimaisPorFilo(filoDoAnimal);
+        int totalAprendido = db.palavrasAprendidasDao().contarAnimaisAprendidosPorFilo(idUsuario, filoDoAnimal);
+
+        if (totalDoFilo > 0 && totalAprendido == totalDoFilo) {
+            requireActivity().runOnUiThread(() -> {
+                dispararNotificacaoAndroid(filoDoAnimal);
+            });
+        }
+    }
+
+    private void dispararNotificacaoAndroid(String filo) {
+        String canalId = "canal_conquistas_ditado_v2";
+        android.app.NotificationManager notificationManager =
+                (android.app.NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            android.app.NotificationChannel canal = new android.app.NotificationChannel(
+                    canalId,
+                    "Conquistas do Jogo",
+                    android.app.NotificationManager.IMPORTANCE_DEFAULT
+            );
+            canal.setDescription("Notificações disparadas quando você completa um filo de animais.");
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(canal);
+            }
+        }
+
+        android.content.Intent intent = new android.content.Intent(requireContext(), MainActivity.class);
+        intent.putExtra("destino", "abrir_parabens");
+        intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        android.app.PendingIntent pendingIntent = android.app.PendingIntent.getActivity(
+                requireContext(),
+                0,
+                intent,
+                android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE
+        );
+
+        androidx.core.app.NotificationCompat.Builder construtor =
+                new androidx.core.app.NotificationCompat.Builder(requireContext(), canalId)
+                        .setSmallIcon(android.R.drawable.star_on)
+                        .setContentTitle("🏆 Nova Conquista Desbloqueada!")
+                        .setContentText("Parabéns! Você aprendeu todas as palavras do filo: " + filo)
+                        .setPriority(androidx.core.app.NotificationCompat.PRIORITY_DEFAULT)
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true);
+
+        if (notificationManager != null) {
+            notificationManager.notify(filo.hashCode(), construtor.build());
         }
     }
 
