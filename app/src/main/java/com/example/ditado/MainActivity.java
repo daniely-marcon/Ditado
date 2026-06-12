@@ -1,6 +1,7 @@
 package com.example.ditado;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,19 +26,27 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private AppDatabase db;
+    private NavController navController;
 
     public float fonte = 18f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        androidx.core.splashscreen.SplashScreen splashScreen =
+                androidx.core.splashscreen.SplashScreen.installSplashScreen(this);
+
+
+        final long tempoEspera = System.currentTimeMillis() + 2000;
+        splashScreen.setKeepOnScreenCondition(() -> System.currentTimeMillis() < tempoEspera);
+
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         setSupportActionBar(binding.toolbar);
-
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -45,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(this);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.FirstFragment,
@@ -55,28 +63,22 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-
         AppBarLayout appBarLayout = findViewById(R.id.meuAppBarLayout);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-
             int telaAtual = destination.getId();
 
             if (telaAtual == R.id.LoginFragment ||
                     telaAtual == R.id.CadastroFragment ||
                     telaAtual == R.id.ResetPasswordFragment ||
-                    telaAtual == R.id.CodeRequestFragment ) {
+                    telaAtual == R.id.CodeRequestFragment) {
 
                 appBarLayout.setVisibility(View.GONE);
-
             } else {
-
                 appBarLayout.setVisibility(View.VISIBLE);
                 carregarDadosDoUsuarioToolbar();
 
-
                 TextView txtNomeTela = findViewById(R.id.txtNomeTela);
-
                 CharSequence nomeDaTela = destination.getLabel();
 
                 if (nomeDaTela != null) {
@@ -84,9 +86,37 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     txtNomeTela.setText("");
                 }
-
             }
         });
+
+        tratarDadosDaIntent(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+
+        tratarDadosDaIntent(intent);
+    }
+
+    private void tratarDadosDaIntent(Intent intent) {
+        if (intent != null && intent.hasExtra("destino")) {
+            String destino = intent.getStringExtra("destino");
+            if ("abrir_parabens".equals(destino)) {
+                intent.removeExtra("destino");
+
+                binding.getRoot().post(() -> {
+                    try {
+                        if (navController != null) {
+                            navController.navigate(R.id.ParabensFragment);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }
     }
 
     public void carregarDadosDoUsuarioToolbar() {
@@ -112,23 +142,18 @@ public class MainActivity extends AppCompatActivity {
                             imgFoto.setImageResource(R.drawable.ic_launcher_background);
                         }
 
-                        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-
                         View.OnClickListener abrirPerfilListener = v -> {
                             if (navController.getCurrentDestination() != null &&
                                     navController.getCurrentDestination().getId() != R.id.CadastroFragment) {
 
                                 Bundle args = new Bundle();
-                                args.putInt("id_usuario_edicao", idUsuario); // Passa o ID atual
-
+                                args.putInt("id_usuario_edicao", idUsuario);
                                 navController.navigate(R.id.CadastroFragment, args);
                             }
                         };
 
                         txtNome.setOnClickListener(abrirPerfilListener);
                         imgFoto.setOnClickListener(abrirPerfilListener);
-
-
                     });
                 }
             }).start();
@@ -137,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }

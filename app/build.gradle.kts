@@ -70,7 +70,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.room:room-common:2.6.1")
     implementation("org.springframework.security:spring-security-crypto:5.8.0")
-
+    implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.sun.mail:android-mail:1.6.7")
     implementation("com.sun.mail:android-activation:1.6.7")
 

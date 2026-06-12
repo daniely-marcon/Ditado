@@ -104,6 +104,7 @@
             app:destination="@id/TerceiroFragment"
             />
 
+
     </fragment>
 
 
@@ -138,12 +139,22 @@
         tools:layout="@layout/fragment_code_request">
         <action
             android:id="@+id/action_CodeRequestFragment_to_LoginFragment"
-                app:destination="@id/LoginFragment"/>
+            app:destination="@id/LoginFragment"/>
         <action
             android:id="@+id/action_CodeRequestFragment_to_ResetPasswordFragment"
             app:destination="@id/ResetPasswordFragment"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/ParabensFragment"
+        android:name="com.example.ditado.ParabensFragment"
+        android:label="Tela de Parabenização"
+        tools:layout="@layout/fragment_parabens">
 
-
+        <action
+            android:id="@+id/action_ParabensFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

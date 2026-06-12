@@ -22,6 +22,12 @@ public interface PalavrasAprendidasDao {
 
     @Query("SELECT A.* FROM Animal AS A INNER JOIN PalavrasAprendidas AS PA ON A.id_animal = PA.id_animal WHERE PA.id_usuario = :idUsuario AND A.nome_animal LIKE '%' || :termoBusca || '%'")
     List<Animal> buscarPalavrasDoUsuario(int idUsuario, String termoBusca);
+
+    @Query("SELECT COUNT(*) FROM Animal WHERE filo_animal = :filo")
+    int contarTotalAnimaisPorFilo(String filo);
+
+    @Query("SELECT COUNT(DISTINCT A.id_animal) FROM Animal AS A INNER JOIN PalavrasAprendidas AS PA ON A.id_animal = PA.id_animal WHERE PA.id_usuario = :idUsuario AND A.filo_animal = :filo")
+    int contarAnimaisAprendidosPorFilo(int idUsuario, String filo);
     @Insert
     void insert(PalavrasAprendidas palavrasAprendidas);
 
