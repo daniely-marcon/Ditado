@@ -13,19 +13,23 @@ import com.example.ditado.R;
 import com.example.ditado.dao.AnimalDao;
 import com.example.ditado.dao.PalavrasAprendidasDao;
 import com.example.ditado.dao.UsuarioDao;
+import com.example.ditado.dao.AudioAnimalDao;
 import com.example.ditado.entities.Animal;
+import com.example.ditado.entities.AudioAnimal;
 import com.example.ditado.entities.PalavrasAprendidas;
 import com.example.ditado.entities.Usuario;
 
 import java.io.ByteArrayOutputStream;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Usuario.class, Animal.class, PalavrasAprendidas.class}, version = 1)
+@Database(entities = {Usuario.class, Animal.class, PalavrasAprendidas.class, AudioAnimal.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract AnimalDao animalDao();
     public abstract PalavrasAprendidasDao palavrasAprendidasDao();
     public abstract UsuarioDao usuarioDao();
+
+    public abstract AudioAnimalDao audioAnimalDao();
 
     private static volatile AppDatabase INSTANCE;
     private static Context mContext;
@@ -45,7 +49,6 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
     private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -64,8 +67,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.insert(new Animal("Beija-Flor", drawableToByteArray(mContext, R.drawable.beijaflor), "Aves"));
                 dao.insert(new Animal("Papagaio", drawableToByteArray(mContext, R.drawable.papagaio), "Aves"));
                 dao.insert(new Animal("Rolinha", drawableToByteArray(mContext, R.drawable.rolinha), "Aves"));
-
-
 
 
                 dao.insert(new Animal("Pirarucu", drawableToByteArray(mContext, R.drawable.pirarucu), "Peixes"));
@@ -87,6 +88,11 @@ public abstract class AppDatabase extends RoomDatabase {
                 dao.insert(new Animal("Baleia", drawableToByteArray(mContext, R.drawable.baleia),  "Mamíferos"));
                 dao.insert(new Animal("Elefante", drawableToByteArray(mContext, R.drawable.elefante),  "Mamíferos"));
 
+                AudioAnimalDao audio = INSTANCE.audioAnimalDao();
+
+                audio.insert(new AudioAnimal("Cachorro",  R.raw.cachorro));
+                audio.insert(new AudioAnimal("Galinha", R.raw.galinha));
+                audio.insert(new AudioAnimal("Gato",R.raw.gato));
             });
         }
     };
@@ -126,5 +132,5 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-
 }
+
