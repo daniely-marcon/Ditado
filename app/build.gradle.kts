@@ -7,11 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.ditado"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.ditado"
@@ -39,6 +35,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    androidResources {
+        ignoreAssetsPattern = "cachorro.m4a:gato.m4a"
+    }
+
     packaging {
         resources {
             excludes += listOf(

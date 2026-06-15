@@ -142,7 +142,8 @@ public class SecondFragment extends Fragment {
                 exibirAnimalAtual(true);
             } else {
                 Toast.makeText(getContext(), "Parabéns! Você terminou o grupo!", Toast.LENGTH_LONG).show();
-                NavHostFragment.findNavController(this).navigate(R.id.action_SecondFragment_to_TerceiroFragment);
+                NavHostFragment.findNavController(this).navigate(R.id.action_SecondFragment_to_ParabensFragment);
+                //NavHostFragment.findNavController(this).navigate(R.id.action_SecondFragment_to_TerceiroFragment);
             }
         } else {
             binding.txtResult.setText("Quase lá! Tente de novo.");
@@ -151,17 +152,18 @@ public class SecondFragment extends Fragment {
     }
 
     private void salvarPalavraAprendida(Animal animalAcertado) {
+        Context contextoSeguro = requireContext().getApplicationContext();
         SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
         int idUsuario = pref.getInt("id_usuario", -1);
 
         if (idUsuario != -1) {
             PalavrasAprendidas novaConquista = new PalavrasAprendidas(idUsuario, animalAcertado.getId_animal());
-            AppDatabase db = AppDatabase.getDatabase(requireContext());
+            AppDatabase db = AppDatabase.getDatabase(contextoSeguro);
 
             new Thread(() -> {
                 try {
                     db.palavrasAprendidasDao().insert(novaConquista);
-                    verificarConquistaDoFilo(idUsuario, animalAcertado.getFilo_animal());
+                    verificarConquistaDoFilo(idUsuario, animalAcertado.getFilo_animal(), contextoSeguro);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -169,23 +171,23 @@ public class SecondFragment extends Fragment {
         }
     }
 
-    private void verificarConquistaDoFilo(int idUsuario, String filoDoAnimal) {
-        AppDatabase db = AppDatabase.getDatabase(requireContext());
+    private void verificarConquistaDoFilo(int idUsuario, String filoDoAnimal,Context context) {
+        AppDatabase db = AppDatabase.getDatabase(context);
 
         int totalDoFilo = db.palavrasAprendidasDao().contarTotalAnimaisPorFilo(filoDoAnimal);
         int totalAprendido = db.palavrasAprendidasDao().contarAnimaisAprendidosPorFilo(idUsuario, filoDoAnimal);
 
         if (totalDoFilo > 0 && totalAprendido == totalDoFilo) {
             requireActivity().runOnUiThread(() -> {
-                dispararNotificacaoAndroid(filoDoAnimal);
+                dispararNotificacaoAndroid(filoDoAnimal,context);
             });
         }
     }
 
-    private void dispararNotificacaoAndroid(String filo) {
+    private void dispararNotificacaoAndroid(String filo, Context context) {
         String canalId = "canal_conquistas_ditado_v2";
         android.app.NotificationManager notificationManager =
-                (android.app.NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             android.app.NotificationChannel canal = new android.app.NotificationChannel(
@@ -199,19 +201,19 @@ public class SecondFragment extends Fragment {
             }
         }
 
-        android.content.Intent intent = new android.content.Intent(requireContext(), MainActivity.class);
+        android.content.Intent intent = new android.content.Intent(context, MainActivity.class);
         intent.putExtra("destino", "abrir_parabens");
         intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         android.app.PendingIntent pendingIntent = android.app.PendingIntent.getActivity(
-                requireContext(),
+                context,
                 0,
                 intent,
                 android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE
         );
 
         androidx.core.app.NotificationCompat.Builder construtor =
-                new androidx.core.app.NotificationCompat.Builder(requireContext(), canalId)
+                new androidx.core.app.NotificationCompat.Builder(context, canalId)
                         .setSmallIcon(android.R.drawable.star_on)
                         .setContentTitle("🏆 Nova Conquista Desbloqueada!")
                         .setContentText("Parabéns! Você aprendeu todas as palavras do filo: " + filo)

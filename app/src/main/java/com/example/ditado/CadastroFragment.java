@@ -97,7 +97,7 @@ public class CadastroFragment extends Fragment {
             String tipo = binding.radioProfessor.isChecked() ? "Professor" : "Aluno";
 
 
-            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || (!isModoEdicao && fotoBitmap == null)) {
+            if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || !isModoEdicao == false && fotoBitmap == null) {
                 Toast.makeText(getContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -172,6 +172,14 @@ public class CadastroFragment extends Fragment {
             }
             NavHostFragment.findNavController(this)
                     .navigate(R.id.action_CadastroFragment_to_CodeRequestFragment, bundle);
+        });
+        binding.btnVoltar.setOnClickListener( v-> {
+            Bundle bundle = new Bundle();
+            if (usuarioLogado != null) {
+                bundle.putString("email", usuarioLogado.getEmail());
+            }
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_CadastroFragment_to_FirstFragment, bundle);
         });
 
     }

@@ -1,5 +1,7 @@
 package com.example.ditado.database;
 
+import static androidx.room.RoomDatabase.*;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -49,7 +51,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+    private static Callback sRoomDatabaseCallback = new Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
