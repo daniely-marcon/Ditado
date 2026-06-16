@@ -195,5 +195,19 @@
 
         app:layout_constraintVertical_bias="0.055" />
 
+    <!-- Procure o TextView txtTitulo e adicione o botão abaixo ou ao lado dele -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sair"
+        android:backgroundTint="@color/destaque"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

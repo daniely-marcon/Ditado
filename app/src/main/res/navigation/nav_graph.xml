@@ -167,5 +167,19 @@
             app:destination="@id/FirstFragment"
             app:popUpTo="@id/FirstFragment"
             app:popUpToInclusive="false" />
+
+
+        <fragment
+            android:id="@+id/FirstFragment"
+            android:name="com.example.ditado.FirstFragment"
+        />
+
+        <!-- Adicione esta linha -->
+        <action
+            android:id="@+id/action_FirstFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
     </fragment>
 </navigation>

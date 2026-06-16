@@ -174,12 +174,22 @@ public class CadastroFragment extends Fragment {
                     .navigate(R.id.action_CadastroFragment_to_CodeRequestFragment, bundle);
         });
         binding.btnVoltar.setOnClickListener( v-> {
-            Bundle bundle = new Bundle();
-            if (usuarioLogado != null) {
-                bundle.putString("email", usuarioLogado.getEmail());
-            }
+                NavHostFragment.findNavController(this).popBackStack();
+
+          });
+
+        binding.btnLogout.setOnClickListener(v -> {
+            // 1. Limpar as preferências de login
+            SharedPreferences pref = requireActivity().getSharedPreferences("login_prefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear(); // Remove id_usuario e outros dados salvos
+            editor.apply();
+
+            // 2. Voltar para a tela de Login
             NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_CadastroFragment_to_FirstFragment, bundle);
+                    .navigate(R.id.action_FirstFragment_to_LoginFragment);
+
+            Toast.makeText(getContext(), "Logout realizado com sucesso", Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -194,7 +204,8 @@ public class CadastroFragment extends Fragment {
         binding.edtSenhaUser.setVisibility(View.INVISIBLE);
         binding.txtSenha.setVisibility(View.INVISIBLE);
         binding.btnSenha.setVisibility(View.VISIBLE);
-    }
+        binding.btnLogout.setVisibility(View.VISIBLE);
+        }
 
 
 

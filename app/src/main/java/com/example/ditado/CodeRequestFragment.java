@@ -86,8 +86,7 @@ public class CodeRequestFragment extends Fragment {
         });
 
         binding.btnVoltarCODE.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_CodeRequestFragment_to_LoginFragment);
+            NavHostFragment.findNavController(this).popBackStack();
         });
     }
 
